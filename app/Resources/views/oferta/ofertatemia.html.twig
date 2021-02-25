@@ -1,0 +1,38 @@
+{% extends 'home.html.twig' %}
+{% block bodymain %}
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Pershkrim</th>
+        <th>Vlera e Fondit Limit</th>
+        <th>Adresa e Dorezimit</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for oferta in oferta %}
+        <tr>
+
+            <td>{{ oferta.pershkrimi }}</td>
+            <td>{{ oferta.vlefta }}</td>
+            <td>{{ oferta.adresaDorezimit }}</td>
+            <td><button type="button" class="btn btn-outline-info">
+             <a href="{{ path('Modifiko_Oferten', {'id': oferta.id}) }}">Modifiko</a>
+{#                    </a>#}
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger">
+                    <a href="{{ path('fshiOferten', {'id': oferta.id})}}">
+               Fshi</a>
+                </button></td>
+
+
+    {% else %}
+        <tr>
+            <td colspan="15">no records found</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

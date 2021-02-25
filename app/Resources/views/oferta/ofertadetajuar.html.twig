@@ -1,0 +1,20 @@
+{% extends 'default/home.html.twig' %}
+    {% block bodymain %}
+    <table>
+
+          {% for result in results %}
+       <tr>
+           <td>{{ result.vlefta }} </td>
+           <td>{{ result.vendimi }} </td>
+           <td>{{ result.titull_thirrje }} </td>
+           <td>{{ result.status }} </td>
+           <td>{{ result.data_perfundimit }} </td>
+           <td> <a href="{{ path('Modifiko_Oferten', {'id':result.id}) }}"><button type="submit" >Modifiko Oferten </button></a>
+           </td>
+
+
+       </tr>
+          {% endfor %}
+    </table>
+    {% endblock %}
+        {% block javascripts %}{% endblock %}

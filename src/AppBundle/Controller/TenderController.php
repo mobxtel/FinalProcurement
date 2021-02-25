@@ -1,0 +1,412 @@
+<?php
+
+
+namespace AppBundle\Controller;
+
+
+use AppBundle\Entity\Dokumenta;
+use AppBundle\Entity\FushaOperimi;
+use AppBundle\Entity\Tender;
+use AppBundle\Forms\TenderAktivType;
+use AppBundle\Forms\TenderType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+class TenderController extends Controller
+{
+    /**
+     * @Route("/tender/tenderat_e_mi", name="tender_view", methods={"GET"})
+     */
+    public function tenderatTotal(EntityManagerInterface $entityManager)
+    {
+        if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+
+            $biznesId = $this->get('session')->get('loginUserId');
+            $statusDraft = "draft";
+            $today = new \DateTime();
+
+            $repository = $entityManager->getRepository(Tender::class);
+
+            $tenderAll = $repository->createQueryBuilder('q')
+                ->andWhere('q.biznesId=:val')
+                ->setParameter('val', $biznesId)
+                ->andWhere('q.dataPerfundimit LIKE :dataSot')
+                ->setParameter('dataSot', "%" . $today->format('Y-m-d') . "%")
+                ->andWhere('q.isDeleted=0')
+                ->getQuery()
+                ->getResult();
+
+
+            foreach ($tenderAll as $tender) {
+                $tender->setEmerStatusi("inaktiv");
+                $entityManager->persist($tender);
+                $entityManager->flush();
+            }
+
+            $tenderDraft = $repository->createQueryBuilder('q')
+                ->andWhere('q.biznesId=:val')
+                ->setParameter('val', $biznesId)
+                ->andWhere('q.emerStatusi=:statusDraft')
+                ->setParameter('statusDraft', $statusDraft)
+                ->getQuery()
+                ->getResult();
+            $tenderAktivQuery = "SELECT tender.id ,
+            COUNT(*) as nrAplikimesh,
+           
+            tender.titull_thirrje as titullThirrje, 
+            tender.fond_limit as fondLimit,
+            tender.emer_statusi as emerStatusi,
+            tender.data_perfundimit as dataPerfundimit FROM oferta
+            inner join tender on  oferta.tender_id=tender.id
+            WHERE tender.is_deleted=0 
+            And tender.emer_statusi='aktiv'
+            And tender.biznes_id=:biznesId
+            GROUP BY tender_id;";
+            $statement = $entityManager->getConnection()->prepare($tenderAktivQuery);
+
+            $statement->execute(array('biznesId' => $biznesId));
+            $tendersAktiv = $statement->fetchAll();
+
+
+//       $tendersAktiv=$repository->createQueryBuilder('q')
+////            ->andWhere('q.biznesId=:val')
+//            ->setParameter('val',$biznesId)
+//            ->andWhere('q.emerStatusi=:statusDraft')
+//            ->setParameter('statusDraft',"aktiv")
+//            ->andWhere('q.isDeleted=0')
+//            ->getQuery()
+//            ->getResult();
+////        dump($tendersAktiv);die();
+
+            $tenderInaktivvQuery = "SELECT tender.id as id,
+                COUNT(*) as nrAplikimesh,
+           
+                tender.titull_thirrje as titullThirrje, 
+                tender.fond_limit as fondLimit,
+                tender.emer_statusi as emerStatusi,
+                tender.data_perfundimit as dataPerfundimit FROM oferta
+                inner join tender on  oferta.tender_id=tender.id
+                WHERE tender.is_deleted=0 
+                And tender.emer_statusi='inaktiv'
+                And tender.biznes_id=:biznesId
+                GROUP BY tender_id;";
+
+            $statement = $entityManager->getConnection()->prepare($tenderInaktivvQuery);
+
+            $statement->execute(array('biznesId' => $biznesId));
+            $tenderInaktiv = $statement->fetchAll();
+
+//        $tenderInaktiv=$repository->createQueryBuilder('q')
+//            ->andWhere('q.biznesId=:val')
+//            ->setParameter('val',$biznesId)
+//            ->andWhere('q.emerStatusi=:inaktivValue')
+//            ->setParameter('inaktivValue','inaktiv')
+//            ->andWhere('q.isDeleted=0')
+//            ->getQuery()
+//            ->getResult();
+        } 
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('tender/view.html.twig', [
+            'tendersAktiv' => $tendersAktiv,
+            'tendersDraft' => $tenderDraft,
+            'tenderInaktiv' => $tenderInaktiv
+        ]);
+    }
+
+    /**
+     * @Route("/tender/krijoTender", name="tender_krijo")
+     */
+    public function tenderKrijo(Request $request)
+    {
+        if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+
+            $tender = new Tender();
+            $dokument = new Dokumenta();
+            $form = $this->createForm(TenderType::class);
+            $form->handleRequest($request);
+
+            if ($form->isValid() && $form->isSubmitted()) {
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $tender->setBiznesId("1");
+                $tender->setCreatedBy("1");
+                $tender->setStatus(1);
+                $tender->setTitullThirrje($form->get('titullThirrje')->getData());
+                $tender->setPershkrim($form->get('pershkrim')->getData());
+                $tender->setDataPerfundimit($form->get('dataPerfundimit')->getData());
+                $tender->setAdresaDorezimit($form->get('adresaDorezimit')->getData());
+                $tender->setFondLimit($form->get('fondLimit')->getData());
+                $tender->setLicenca($form->get('licenca')->getData());
+                $tender->setEmerStatusi("draft");
+                $tender->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+                $date = new \DateTime();
+                $tender->setDataFillimit($date);
+                $tender->setIsDeleted(0);
+    //file upload
+
+                $uploads_directory = $this->getParameter('uploads_directory');
+                $entityManager->persist($tender);
+                $entityManager->flush();
+
+                $files = $request->files->get('tender')['document'];
+                foreach ($files as $file) {
+                    $dokument = new Dokumenta();
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move(
+                        $uploads_directory,
+                        $filename
+                    );
+                    $dokument->setTitullDokumenti($filename);
+                    $dokument->setTenderId($tender->getId());
+                    $dokument->setPath($file);
+                    $dokument->setIsDeleted(0);
+
+                    $dokument->setCreatedBy(1);
+                    $entityManager->persist($dokument);
+                    $entityManager->flush();
+
+                }
+
+                $this->addFlash(
+                    'notice',
+                    'Your changes were saved!'
+                );
+                return $this->redirectToRoute('tender_view');
+            }
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('tender/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
+    }
+
+
+    /**
+     * @Route("/tender/{id}/shiko", name="tender_shiko")
+     */
+    public function shikoDetajet(Request $request, Tender $tender, EntityManagerInterface $entityManager)
+    {
+        if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+            $dokumenta = new Dokumenta();
+            $repository = $entityManager->getRepository(FushaOperimi::class);
+            $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+            $businesId = $this->get('session')->get('loginUserId');
+
+            $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
+                ->andWhere('dok.tenderId=:idTender')
+                ->setParameter('idTender', $tender->getId())
+                ->getQuery()
+                ->getResult();
+
+            $fusheOperimi = $repository->createQueryBuilder('fop')
+                ->andWhere('fop.id=:fusheOperimiTender')
+                ->setParameter('fusheOperimiTender', $tender->getFusheOperimiId())
+                ->getQuery()
+                ->getResult();
+
+            $fusheOperimi = $fusheOperimi[0]->getEmerFusheOperimi();
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('tender/details.html.twig', [
+            'tender' => $tender,
+            'fusheOperimi' => $fusheOperimi,
+            'dokumenta' => $dokumenta
+//            'result'=>$result
+
+        ]);
+    }
+
+    /**
+     * @Route("/tender/{id}/modifiko", name="tender_edit")
+     */
+    public function modifikoDraft(Request $request, Tender $tender, EntityManagerInterface $entityManager)
+    {
+        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $form = $this->createForm(TenderType::class, $tender);
+            $dokumenta = new Dokumenta();
+            $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+            $businesId = $this->get('session')->get('loginUserId');
+
+            $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
+                ->andWhere('dok.tenderId=:idTender')
+                ->setParameter('idTender', $tender->getId())
+                ->getQuery()
+                ->getResult();
+
+            $form->get('fushe_operimi_id')->setData($tender->getFusheOperimiId());
+
+            $fusheOperim=new FushaOperimi();
+            $fusheOperim=$fusheOperim->setId($tender->getFusheOperimiId());
+            $form->get('fushe_operimi_id')->setData($fusheOperim);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $tender->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('tender_view');
+            }
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('tender/edit.html.twig', [
+            'tender' => $tender,
+            'form' => $form->createView(),
+            'dokumenta' => $dokumenta
+        ]);
+    }
+
+    /**
+     * @Route("/tender/{id}/publiko", name="tender_publiko_draft", methods={"GET","POST"})
+     */
+
+    public function publiko(Request $request, Tender $tender)
+    {
+        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+
+//        Beje Aktive
+            $tender->setDataFillimit(new \DateTime());
+            $tender->setEmerStatusi('aktiv');
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('tender_view');
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+    }
+
+    /**
+     * @Route("/tender/{id}/modifikoAktiv", name="tender_modifiko_aktiv", methods={"GET","POST"})
+     */
+
+    public function modifikoAktiv(Request $request, Tender $tender)
+    {
+        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $form = $this->createForm(TenderAktivType::class);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('tender_view');
+            }
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('tender/modifikoaktiv.html.twig', [
+            'tender' => $tender,
+            'form' => $form->createView()
+//
+        ]);
+
+    }
+
+    /**
+     * @Route("/tender/{id}/fshi", name="tender_fshi")
+     */
+
+    public function fshiTender(Request $request, Tender $tender, EntityManagerInterface $entityManager)
+    {   if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $entityManager->getRepository(Tender::class);
+            $tender->setIsDeleted(1);
+            $entityManager->persist($tender);
+            $entityManager->flush();
+            return $this->redirectToRoute('tender_view');
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+    }
+
+    /**
+     * @Route("/tender/{id}/mbyll", name="tender_mbyll")
+     */
+
+    public function MbyllTender(Request $request, Tender $tender, EntityManagerInterface $entityManager)
+    {
+        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $entityManager->getRepository(Tender::class);
+            $tender->setEmerStatusi('inaktiv');
+            $entityManager->persist($tender);
+            $entityManager->flush();
+            return $this->redirectToRoute('tender_view');
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+    }
+    /**
+     * @Route("/tender_aktiv/{id}/ofertat", name="shiko_ofertat_tender_aktiv")
+     */
+
+    public function OfertatTenderAktiv(Request $request, Tender $tender, EntityManagerInterface $entityManager)
+    {
+        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $ofertatQuery="SELECT oferta.id as 'OfertaId',
+                     oferta.pershkrimi as 'OfertaPershkrim', 
+                     oferta.vlefta, 
+                     oferta.adresa_dorezimit, 
+                     tender.id as 'tenderId', 
+                     tender.pershkrim, 
+                     biznes.id as 'biznesId', 
+                     biznes.emer_biznesi, 
+                     biznes.email, 
+                     biznes.adresa, 
+                     biznes.nipt 
+                     From oferta Inner join tender on oferta.tender_id=tender.id 
+                     inner join biznes on oferta.created_by=biznes.id
+                     WHERE oferta.tender_id=:tenderId
+                     AND oferta.is_deleted=0";
+
+            $statement = $entityManager->getConnection()->prepare($ofertatQuery);
+
+            $statement->execute(array('tenderId' => $tender->getId()));
+            $ofertat = $statement->fetchAll();
+
+            $repository = $entityManager->getRepository(FushaOperimi::class);
+            $fusheOperimi = $repository->createQueryBuilder('fop')
+                ->andWhere('fop.id=:fusheOperimiTender')
+                ->setParameter('fusheOperimiTender', $tender->getFusheOperimiId())
+                ->getQuery()
+                ->getResult();
+
+            $fusheOperimi = $fusheOperimi[0]->getEmerFusheOperimi();
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('tender/shikoOfertat.html.twig', [
+            'ofertat'=>$ofertat,
+            'tender'=>$tender,
+            'fusheOperimi'=>$fusheOperimi
+
+        ]);
+
+//                return $this->redirectToRoute('tender_view');
+
+
+    }
+    /**
+     * @Route("/tender_aktiv/{id}/ofertat/dokumentat", name="shiko_ofertat_tender_aktiv_dokumentat")
+     */
+
+
+}

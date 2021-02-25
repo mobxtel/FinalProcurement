@@ -1,0 +1,43 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block bodymain %}
+
+    <table class="table">
+    <tbody>
+
+    <tr>
+        <th>TitullThirrje</th>
+        <td>{{ tender.titullThirrje }}</td>
+    </tr>
+    <tr>
+        <th>Pershkrim</th>
+        <td>{{ tender.pershkrim }}</td>
+    </tr>
+    <tr>
+        <th>FondLimit</th>
+        <td>{{ tender.fondLimit }}</td>
+    </tr>
+    <tr>
+        Biznesi Information
+    </tr>
+    </tbody>
+    </table>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+
+    {#    <button class="btn">#}
+
+
+    {#        <a href="{{ path('tender_publiko_draft', {'id':) }}">Publiko</a>#}
+    {#    </button>#}
+
+    <button type="submit" class="btn btn-primary">
+        {{ button_label|default('Apliko') }}
+    </button>
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

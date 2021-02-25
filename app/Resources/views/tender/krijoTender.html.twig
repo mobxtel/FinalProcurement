@@ -1,0 +1,47 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block bodymain %}
+
+{{ form_start(form) }}
+ {{ form_widget(form) }}
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+    {% for dokument in dokumenta %}
+{#        <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">#}
+{#           </a>#}
+        <div>
+           {{''~ dokument.titullDokumenti|e }}
+        <button class="btn" onclick="deleteAction({{ dokument.id }})" >Delete</button>
+
+        </div>
+    {% endfor %}
+
+
+    <script>
+        function deleteAction(dokumentId) {
+            $.ajax({
+                url: "/ajax_delete",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "dokumentFshire": dokumentId
+                },
+                async: true,
+                success: function (data)
+                {
+                    console.log(data)
+                }
+
+
+
+            })
+
+        }
+
+    </script>
+
+
+
+
+{% endblock %}

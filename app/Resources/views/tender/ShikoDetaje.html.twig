@@ -1,0 +1,55 @@
+{% extends 'home.html.twig' %}
+{% block bodymain %}
+    <h1>Details</h1>
+
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>TitullThirrje</th>
+            <td>{{ tender.titullThirrje }}</td>
+        </tr>
+        <tr>
+            <th>Pershkrim</th>
+            <td>{{ tender.pershkrim }}</td>
+        </tr>
+        <tr>
+            <th>FondLimit</th>
+            <td>{{ tender.fondLimit }}</td>
+        </tr>
+        <tr>
+            <th>AdresaDorezimit</th>
+            <td>{{ tender.adresaDorezimit }}</td>
+        </tr>
+        <tr>
+            <th>DataFillimit</th>
+            <td>{{ tender.dataFillimit ? tender.dataFillimit|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>DataPerfundimit</th>
+            <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Licenca</th>
+            <td>{{ tender.licenca }}</td>
+        </tr>
+        <tr>
+            <th>IsDeleted</th>
+            <td>{{ tender.isDeleted ? 'Yes' : 'No' }}</td>
+        </tr>
+
+            <th>EmerStatusi</th>
+            <td>{{ tender.emerStatusi }}</td>
+        </tr>
+
+        <tr>
+            <th>Fushe Operimi</th>
+            <td>{{ fusheOperimi }}</td>
+        </tr>
+        </tbody>
+    </table>
+    {% for dokument in dokumenta %}
+<a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+        <li>{{''~ dokument.titullDokumenti|e }}</li>
+    {% endfor %}
+{% endblock %}
