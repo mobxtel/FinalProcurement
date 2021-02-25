@@ -46,7 +46,7 @@ class BiznesController extends Controller
          return $this->redirectToRoute('login');
         }
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('regjistrim.html.twig', [
             'form' => $form->createView(),
         ]);
     }
