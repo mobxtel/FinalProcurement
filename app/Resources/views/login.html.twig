@@ -8,19 +8,20 @@
                 <div class="login-form">
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="text-uppercase">Username</label>
-                        {{form_widget(form.username)}}
+                        {{form_widget(form.username,{'attr': {'class': 'input--style-4'}})}}
                       
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                        {{form_widget(form.password)}}
+                        {{form_widget(form.password,{'attr': {'class': 'input--style-4'}})}}
                     </div>
 
 
                     <div class="form-check">
-                         {{form_widget(form.submit)}}
+                         {{form_widget(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
+                             'tag':'button'}})}}
                     </div>
-
+                    <a href="{{ path('regjistohu') }}">Regjistrohu ne Sistem</a>
                 </div>
 
             </div>
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <a href="{{ path('regjistohu') }}">Regjistrohu ne Sistem</a>
+
 </section>
 </div>
 

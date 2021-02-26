@@ -26,13 +26,13 @@
 
                         <div class="col-3">
                             <div class="input-group">
-                                {{ form_row(form.emer_biznesi) }}
+                                {{ form_row(form.emer_biznesi,{'attr': {'class': 'input--style-4'}}) }}
 {#                                <input class="input--style-4" type="text" name="first_name" placeholder="Emer Biznesi">#}
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="input-group">
-                                {{ form_row(form.nipt) }}
+                                {{ form_row(form.nipt,{'attr': {'class': 'input--style-4'}}) }}
 {#                                <input class="input--style-4" type="text" name="last_name" placeholder="Nipt">#}
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="row row-space col-12">
                         <div class="col-6">
                             <div class="input-group">
-                                {{ form_row(form.email) }}
+                                {{ form_row(form.email,{'attr': {'class': 'input--style-4'}}) }}
 {#                     <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Email">#}
 
                                 </div>
@@ -54,7 +54,7 @@
 
                         <div class="col-6">
                                 <div class="input-group">
-                                    {{ form_row(form.logo) }}
+                                    {{ form_row(form.logo,{'attr': {'class': 'input--style-4'}}) }}
 {#                                    <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Logo">#}
 
                                 </div>
@@ -65,7 +65,7 @@
                     <div class="row row-space col-12">
                         <div class="col-6">
                             <div class="input-group">
-                                {{ form_row(form.nipt) }}
+{#                                {{ form_row(form.fushe_operimi_id,{'attr': {'class': 'input--style-4'}}) }}#}
 
 {#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="FusheOperimi">#}
 
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                {{ form_row(form.password)}}
+                                {{ form_row(form.password,{'attr': {'class': 'input--style-4'}})}}
 {#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Fjalekalim">#}
 
                             </div>
@@ -83,21 +83,23 @@
                     <div class="row row-space col-12">
                         <div class="col-6">
                             <div class="input-group">
-                                 {{ form_row(form.numerTelefoni)}}
+                                 {{ form_row(form.numerTelefoni,{'attr': {'class': 'input--style-4'}})}}
 {#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Nr.Telefoni">#}
 
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="ReType">
-
+{#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="ReType">#}
+                                {{ form_row(form.adresa,{'attr': {'class': 'input--style-4'}})}}
                             </div>
                         </div>
                     </div>
                     <div class="row row-space col-12">
                     <div class="p-t-15 col-12">
-                        <button class="btn btn--radius-2 btn--black" style="width: 100%" type="submit">Submit</button>
+{#                        <button class="btn btn--radius-2 btn--black" style="width: 100%" type="submit">Submit</button>#}
+                        {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
+                            'tag':'button','style':'width: 100%'}})}}
                     </div>
                     </div>
                     {{form_end(form)}}

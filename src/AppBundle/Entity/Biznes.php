@@ -3,8 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-/**
+/*
  * Biznes
  *
  * @ORM\Table(name="biznes")
@@ -404,4 +403,6 @@ class Biznes
     {
         return $this->id;
     }
+
+
 }

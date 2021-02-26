@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\BiznesFushaOperimi;
 use AppBundle\Entity\Role;
 use AppBundle\Form\LoginAdminType;
 use AppBundle\Form\UserRegisterType;
@@ -9,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Biznes;
+use AppBundle\Entity\FushaOperimi;
 
 class BiznesController extends Controller
 {
@@ -18,8 +20,11 @@ class BiznesController extends Controller
     public function registerBiznesAction(Request $request)
     {
         $biznes = new Biznes();
+//        $biznesFusheOp= new BiznesFushaOperimi();
+
         $form = $this->createForm(UserRegisterType::class, $biznes);
         $form->handleRequest($request);
+
         if ($form->isValid() && $form->isSubmitted()){
         
            $logo = $form->get('logo')->getData();
@@ -35,11 +40,14 @@ class BiznesController extends Controller
            $biznes->setLogo($newFilename);
            $biznes->setNumerTelefoni($form->getData()->getNumerTelefoni());
            $biznes->setPassword(base64_encode($form->getData()->getPassword()));
+
            $biznes->setAktiv(0);
            $biznes->setIsDeleted(0);
            $biznes->setPaguar(1);
            if ($this->get('session')->get('loginUserId') != null){
                $biznes->setCreatedBy($this->get('session')->get('loginUserId'));
+//               $biznesFusheOp->setFushaOperimi($form->get('fushe_operimi_id')->getData()->getId());
+//               $biznesFusheOp->setBiznes($biznes->getId());
            }
            $entityManager->persist($biznes);
            $entityManager->flush();

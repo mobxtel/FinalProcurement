@@ -249,7 +249,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
             $form->get('fushe_operimi_id')->setData($tender->getFusheOperimiId());
 
             $fusheOperim=new FushaOperimi();
-            $fusheOperim=$fusheOperim->setId($tender->getFusheOperimiId());
+            $fusheOperim=$fusheOperim->getId($tender->getFusheOperimiId());
             $form->get('fushe_operimi_id')->setData($fusheOperim);
             $form->handleRequest($request);
 
@@ -408,8 +408,16 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
 
 
     }
-    /**
-     * @Route("/tender_aktiv/{id}/ofertat/dokumentat", name="shiko_ofertat_tender_inaktiv")
-     */
+    /*
+    * @Route("/ajax_delete" ,  name="ajax_delete")
+    */
+    public function deleteF(Request $request, EntityManagerInterface $entityManager)
+    {
+        $dokumentFshi=request('dokumentFshire');
+        dump('test');die();
+
+
+    }
+
 
 }
