@@ -42,7 +42,7 @@
         <th>Vlera e Fondit Limit</th>
         <th>Adresa e Dorezimit</th>
         <th>Biznesi</th>
-        <th>Dokumentat</th>
+        <th>Shiko Detaje Oferte</th>
         <th>aktivitet</th>
 
     </tr>
@@ -55,7 +55,10 @@
         <td>{{ oferta.vlefta }}</td>
         <td>{{ oferta.adresa_dorezimit }}</td>
         <td>{{ oferta.emer_biznesi }}</td>
-        <td>Dokumentat</td>
+        <td><button type="button" class="btn btn-outline-info">
+                <a href="{{ path('Modifiko_Oferten', {'id': oferta.OfertaId}) }}">Modifiko</a>
+                {#                    </a>#}
+            </button>
 
         <td><button><a href="">Shpall Fitues</a></button></td>
     </tr>

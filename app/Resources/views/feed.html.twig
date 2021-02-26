@@ -40,7 +40,11 @@ buletini
             </table>
               <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"
                         aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>
-            <a href="{{ path('oferto',{'id':tender.id }) }}"><button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>
+            <a href="{{ path('oferto',{'id':tender.id }) }}">
+                <button id="sidebarCollapse" class="btn btn-primary" >
+                Apliko</a>
+          </button>
+
 {#            <div class="col">#}
 {#                <div class="collapse multi-collapse" id="multiCollapseExample2">#}
 {#                    <div class="card card-body">#}

@@ -3,9 +3,11 @@
     <table class="table">
     <thead>
     <tr>
-        <th>Pershkrim</th>
+        <th>Pershkrim i tenderit</th>
         <th>Vlera e Fondit Limit</th>
-        <th>Adresa e Dorezimit</th>
+        <th>Data e mbylljes se Tenderit</th>
+        <th>Statusi i Tenderit</th>
+        <th>Vendimi</th>
 
 
     </tr>
@@ -14,12 +16,14 @@
     {% for oferta in oferta %}
         <tr>
 
-            <td>{{ oferta.pershkrimi }}</td>
-            <td>{{ oferta.vlefta }}</td>
-            <td>{{ oferta.adresaDorezimit }}</td>
+            <td>{{ oferta.titullTender }}</td>
+            <td>{{ oferta.VleraOferte }}</td>
+            <td>{{ oferta.dataMbylljeTender }}</td>
+        <td>{{ oferta.statusTender }}</td>
+        <td>{{ oferta.vendimi }}</td>
             <td><button type="button" class="btn btn-outline-info">
              <a href="{{ path('Modifiko_Oferten', {'id': oferta.id}) }}">Modifiko</a>
-{#                    </a>#}
+                    </a>
                 </button>
             </td>
             <td>

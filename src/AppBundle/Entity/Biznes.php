@@ -85,7 +85,7 @@ class Biznes
     /**
      * @var integer
      *
-     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     * @ORM\Column(name="created_by", type="integer", nullable=true)
      */
     private $createdBy;
 

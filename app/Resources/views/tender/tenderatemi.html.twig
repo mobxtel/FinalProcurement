@@ -24,7 +24,7 @@
                 <td><button type="button" class="btn btn-outline-info"><a href="{{ path('tender_edit', {'id': tender.id}) }}">Modifiko</a></button></td>
                 <td><button type="button" class="btn btn-success"><a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">Publiko</a></button></td>
                 <td><button type="button" class="btn btn-light"><a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko Detaje</a></button></td>
-                <td><button><a href="">Shiko Detaje</a></button></td>
+                <td><button type="button" class="btn  btn-danger"><a href="{{path('tender_fshi', {'id': tender.id})  }}">Fshi</a></button></td>
             </tr>
         {% else %}
             <tr>
@@ -97,7 +97,7 @@
                 <td>{{ tender.fondLimit }}</td>
                 <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tender.emerStatusi }}</td>
-                <td>{{ tender.nrAplikimesh }}</td>
+                <td><button type="button" class="btn btn-outline-dark"> <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">Shiko {{ tender.nrAplikimesh }} Ofertat </a></button></td>
                 <td> <a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko</a></td>
                 <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">Fshi</a></td>
                 {#                <td>{{ tender.biznesIdId }}</td>#}

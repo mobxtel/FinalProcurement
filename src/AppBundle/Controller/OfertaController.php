@@ -17,12 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OfertaController extends  Controller
 {
+
+
     /**
      * @Route("/ofertim/{id}", name="oferto")
      */
     public function shikoDetajet(Request $request,Tender $tender,EntityManagerInterface  $entityManager)
     {
-        if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+
+        if( ($this->get('session')->get('loginUserId') != null )
+//            && ($this->get('session')->get('roleId') != 4)
+             ){
             $user = $this->get('session')->get('loginUserId');
             $oferta = new Oferta();
             $dokument = new Dokumenta();
@@ -56,18 +61,17 @@ class OfertaController extends  Controller
                     $entityManager->persist($dokument);
                     $entityManager->flush();
                 }
+                return $this->redirectToRoute('buletini');
+
             }
 
-                return $this->redirectToRoute('buletini');
-        }  
+        }
         else{
             return $this->redirectToRoute('homepage');
         }        
-        return $this->render('oferta/aplikim.html.twig',[
-            'form' => $form->createView(),
-            'tender'=>$tender
-        ]);
-
+ return $this->render('oferta/aplikim.html.twig',[
+                'form' => $form->createView(),
+                'tender'=>$tender ]);
     }
     /**
      * @Route("/ofertat_e_mia", name="ofertat_e_mia")
@@ -78,18 +82,97 @@ class OfertaController extends  Controller
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
 
-            $oferta= $repository->createQueryBuilder('q')
-                ->andWhere('q.createdBy=:val')
-                ->setParameter('val', $biznesId)
-                ->andWhere('q.isDeleted=0')
-                ->getQuery()
-                ->getResult();
+            $ofertaQuery="SELECT oferta.id as ofertaId, 
+oferta.vlefta as VleraOferte, 
+                tender.emer_statusi as statusTender, 
+                tender.data_perfundimit as dataMbylljeTender, 
+                oferta.vendimi as vendimi, 
+                tender.titull_thirrje as titullTender, 
+                biznes.id From oferta 
+                inner join tender on oferta.tender_id=tender.id 
+                inner join biznes on oferta.created_by=biznes.id 
+                where oferta.created_by=:biznesId
+                and  oferta.is_deleted=0;" ;
+            $statement = $entityManager->getConnection()->prepare($ofertaQuery);
+
+            $statement->execute(array('biznesId' => $biznesId));
+            $ofertat = $statement->fetchAll();
+
         }
         else{
             return $this->redirectToRoute('homepage');
         }
         return $this->render('oferta/ofertatemia.html.twig',[
-            'oferta' =>$oferta
+            'oferta' =>$ofertat
         ]);
     }
+
+
+    /**
+     * @Route("/modifikoOferten/{id}", name="Modifiko_Oferten")
+     */
+    public function modifikoOferten(Request $request, Oferta $oferte)
+    {
+
+        if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4))
+        {
+        $form = $this->createForm(OfertaType::class, $oferte);
+        $form->handleRequest($request);
+
+
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($oferte);
+            $entityManager->flush();
+
+
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $files = $request->files->get('edito_form')['my_files'];
+            $oferteid = $oferte->getId();
+
+            foreach ($files as $file)
+            {
+                $dokumenta = new Dokumenta();
+                $filename= $file->getClientOriginalName();
+                $file->move(
+                    $uploads_directory,
+                    $filename);
+                $RAW_QUERY2 = "UPDATE dokumenta SET dokumenta.titull_dokumenti = 
+                                '$filename' , dokumenta.path= '$uploads_directory'
+                              WHERE dokumenta.oferta_id = '$oferteid' ";
+                $statement = $entityManager->getConnection()->prepare($RAW_QUERY2);
+                $statement->execute();
+            }
+
+
+            return $this->redirectToRoute('Oferte_e_detajuar');
+            //return $this->render('Oferta/showoferta.html.twig');
+        }
+        return $this->render('Oferta/showoferta.html.twig', array(
+            'form' => $form->createView()));
+        }
+
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+
+    }
+    /**
+     * @Route("/fshiOferten/{id}/fshi", name="fshiOferten")
+     */
+    public function fshiOferten (Request $request,Oferta $oferta,EntityManagerInterface  $entityManager)
+    {
+        if (($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') != 4)) {
+            $entityManager->getRepository(Oferta::class);
+            $oferta->setIsDeleted(1);
+            $entityManager->persist($oferta);
+            $entityManager->flush();
+            return $this->redirectToRoute('ofertat_e_mia');
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
+    }
+
 }

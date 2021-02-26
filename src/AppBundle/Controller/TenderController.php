@@ -24,6 +24,7 @@ class TenderController extends Controller
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
 
             $biznesId = $this->get('session')->get('loginUserId');
+
             $statusDraft = "draft";
             $today = new \DateTime();
 
@@ -32,12 +33,12 @@ class TenderController extends Controller
             $tenderAll = $repository->createQueryBuilder('q')
                 ->andWhere('q.biznesId=:val')
                 ->setParameter('val', $biznesId)
-                ->andWhere('q.dataPerfundimit LIKE :dataSot')
+                ->andWhere('q.dataPerfundimit LIKE  :dataSot')
                 ->setParameter('dataSot', "%" . $today->format('Y-m-d') . "%")
                 ->andWhere('q.isDeleted=0')
                 ->getQuery()
                 ->getResult();
-
+//dump($tenderAll);die();
 
             foreach ($tenderAll as $tender) {
                 $tender->setEmerStatusi("inaktiv");
@@ -49,21 +50,22 @@ class TenderController extends Controller
                 ->andWhere('q.biznesId=:val')
                 ->setParameter('val', $biznesId)
                 ->andWhere('q.emerStatusi=:statusDraft')
+                ->andWhere('q.isDeleted=0')
                 ->setParameter('statusDraft', $statusDraft)
                 ->getQuery()
                 ->getResult();
-            $tenderAktivQuery = "SELECT tender.id ,
-            COUNT(*) as nrAplikimesh,
-           
-            tender.titull_thirrje as titullThirrje, 
-            tender.fond_limit as fondLimit,
-            tender.emer_statusi as emerStatusi,
-            tender.data_perfundimit as dataPerfundimit FROM oferta
-            inner join tender on  oferta.tender_id=tender.id
-            WHERE tender.is_deleted=0 
-            And tender.emer_statusi='aktiv'
-            And tender.biznes_id=:biznesId
-            GROUP BY tender_id;";
+
+            $tenderAktivQuery = "
+SELECT tender.id as id,
+COUNT(oferta.id)as nrAplikimesh , 
+tender.titull_thirrje as titullThirrje, 
+tender.fond_limit as fondLimit, 
+tender.emer_statusi as emerStatusi, 
+oferta.id as ofertaID, 
+tender.data_perfundimit as dataPerfundimit 
+FROM oferta right join tender on oferta.tender_id=tender.id WHERE tender.is_deleted=0 
+And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.id;
+";
             $statement = $entityManager->getConnection()->prepare($tenderAktivQuery);
 
             $statement->execute(array('biznesId' => $biznesId));
@@ -111,7 +113,7 @@ class TenderController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('tender/view.html.twig', [
+        return $this->render('tender/tenderatemi.html.twig', [
             'tendersAktiv' => $tendersAktiv,
             'tendersDraft' => $tenderDraft,
             'tenderInaktiv' => $tenderInaktiv
@@ -133,8 +135,8 @@ class TenderController extends Controller
             if ($form->isValid() && $form->isSubmitted()) {
 
                 $entityManager = $this->getDoctrine()->getManager();
-                $tender->setBiznesId("1");
-                $tender->setCreatedBy("1");
+                $tender->setBiznesId($this->get('session')->get('loginUserId'));
+                $tender->setCreatedBy($this->get('session')->get('loginUserId'));
                 $tender->setStatus(1);
                 $tender->setTitullThirrje($form->get('titullThirrje')->getData());
                 $tender->setPershkrim($form->get('pershkrim')->getData());
@@ -218,7 +220,7 @@ class TenderController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('tender/details.html.twig', [
+        return $this->render('tender/ShikoDetaje.html.twig', [
             'tender' => $tender,
             'fusheOperimi' => $fusheOperimi,
             'dokumenta' => $dokumenta
@@ -374,7 +376,9 @@ class TenderController extends Controller
                      From oferta Inner join tender on oferta.tender_id=tender.id 
                      inner join biznes on oferta.created_by=biznes.id
                      WHERE oferta.tender_id=:tenderId
-                     AND oferta.is_deleted=0";
+                     AND oferta.is_deleted=0
+                     And tender.is_deleted=0
+                    ";
 
             $statement = $entityManager->getConnection()->prepare($ofertatQuery);
 
@@ -405,8 +409,7 @@ class TenderController extends Controller
 
     }
     /**
-     * @Route("/tender_aktiv/{id}/ofertat/dokumentat", name="shiko_ofertat_tender_aktiv_dokumentat")
+     * @Route("/tender_aktiv/{id}/ofertat/dokumentat", name="shiko_ofertat_tender_inaktiv")
      */
-
 
 }
