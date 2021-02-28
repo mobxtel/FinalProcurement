@@ -25,6 +25,8 @@ class TenderController extends Controller
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
 
             $biznesId = $this->get('session')->get('loginUserId');
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
 
             $statusDraft = "draft";
             $today = new \DateTime();
@@ -117,7 +119,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/tenderatemi.html.twig', [
             'tendersAktiv' => $tendersAktiv,
             'tendersDraft' => $tenderDraft,
-            'tenderInaktiv' => $tenderInaktiv
+            'tenderInaktiv' => $tenderInaktiv,
+            'logoUrl'=>$logopath
         ]);
     }
 
@@ -127,7 +130,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function tenderKrijo(Request $request)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
-
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
             $tender = new Tender();
             $dokument = new Dokumenta();
             $form = $this->createForm(TenderType::class);
@@ -192,6 +196,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         }
         return $this->render('tender/index.html.twig', [
             'form' => $form->createView(),
+            'logoUrl'=>$logopath
         ]);
 
     }
@@ -203,6 +208,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function shikoDetajet(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
             $dokumenta = new Dokumenta();
             $repository = $entityManager->getRepository(FushaOperimi::class);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -229,7 +236,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/ShikoDetaje.html.twig', [
             'tender' => $tender,
             'fusheOperimi' => $fusheOperimi,
-            'dokumenta' => $dokumenta
+            'dokumenta' => $dokumenta,
+            'logoUrl'=>$logopath
 //            'result'=>$result
 
         ]);
@@ -241,6 +249,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function modifikoDraft(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
             $form = $this->createForm(TenderType::class, $tender);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
@@ -298,7 +308,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/edit.html.twig', [
             'tender' => $tender,
             'form' => $form->createView(),
-            'dokumenta' => $dokumenta
+            'dokumenta' => $dokumenta,
+            'logoUrl'=>$logopath
         ]);
     }
 
@@ -309,6 +320,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function publiko(Request $request, Tender $tender)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
 
 //        Beje Aktive
             $tender->setDataFillimit(new \DateTime());
@@ -330,6 +343,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function modifikoAktiv(Request $request, Tender $tender)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'uploads/logo/".$logopath."'";
             $form = $this->createForm(TenderAktivType::class);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -344,7 +359,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
 
         return $this->render('tender/modifikoaktiv.html.twig', [
             'tender' => $tender,
-            'form' => $form->createView()
+            'form' => $form->createView(),'logoUrl'=>$logopath
 //
         ]);
 
@@ -375,6 +390,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function MbyllTender(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+
             $entityManager->getRepository(Tender::class);
             $tender->setEmerStatusi('inaktiv');
             $entityManager->persist($tender);
@@ -393,6 +409,9 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function OfertatTenderAktiv(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
             $ofertatQuery="SELECT oferta.id as 'OfertaId',
                      oferta.pershkrimi as 'OfertaPershkrim', 
                      oferta.vlefta, 
@@ -431,7 +450,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/shikoOfertat.html.twig', [
             'ofertat'=>$ofertat,
             'tender'=>$tender,
-            'fusheOperimi'=>$fusheOperimi
+            'fusheOperimi'=>$fusheOperimi,
+            'logoUrl'=>$logopath
 
         ]);
 

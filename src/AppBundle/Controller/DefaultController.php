@@ -28,6 +28,9 @@ class DefaultController extends Controller
           
             if ($biznes instanceof Biznes){
                 $this->get('session')->set('loginUserId', $biznes->getId());
+                $this->get('session')->set('logoPath',$biznes->getLogo());
+
+                $biznesId=$this->get('session')->get('loginUserId');
                 $role =  new Role();
                 $repositoryRole = $this->getDoctrine()->getRepository(Role::class);
                 $roleName = $repositoryRole->find($biznes->getRoleId());

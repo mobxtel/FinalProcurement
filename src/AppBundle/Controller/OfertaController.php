@@ -28,6 +28,8 @@ class OfertaController extends  Controller
         if( ($this->get('session')->get('loginUserId') != null )
 //            && ($this->get('session')->get('roleId') != 4)
              ){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
             $user = $this->get('session')->get('loginUserId');
             $oferta = new Oferta();
             $dokument = new Dokumenta();
@@ -71,7 +73,8 @@ class OfertaController extends  Controller
         }        
  return $this->render('oferta/aplikim.html.twig',[
                 'form' => $form->createView(),
-                'tender'=>$tender ]);
+                'tender'=>$tender,
+                'logoUrl'=>$logopath]);
     }
 
     /**
@@ -80,6 +83,9 @@ class OfertaController extends  Controller
     public function shikoOfertateMia(Request $request,EntityManagerInterface  $entityManager)
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
+
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
 
@@ -104,7 +110,8 @@ oferta.vlefta as VleraOferte,
             return $this->redirectToRoute('homepage');
         }
         return $this->render('oferta/ofertatemia.html.twig',[
-            'oferta' =>$ofertat
+            'oferta' =>$ofertat,
+            'logoUrl'=>$logopath
         ]);
     }
 
@@ -114,6 +121,8 @@ oferta.vlefta as VleraOferte,
     public function shikoOferten(Request $request,EntityManagerInterface  $entityManager, Oferta $oferta)
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -143,7 +152,8 @@ oferta.vlefta as VleraOferte,
         }
         return $this->render('oferta/ofertadetajuar.html.twig',[
             'oferta' =>$oferta,
-            'dokumenta'=>$dokumenta
+            'dokumenta'=>$dokumenta,
+            'logoUrl'=>$logopath
         ]);
     }
 
@@ -155,6 +165,8 @@ oferta.vlefta as VleraOferte,
 
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4))
         {
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
         $form = $this->createForm(OfertaType::class, $oferte);
         $form->handleRequest($request);
            $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -200,7 +212,8 @@ oferta.vlefta as VleraOferte,
         }
         return $this->render('Oferta/showoferta.html.twig', [
             'form' => $form->createView(),
-            'dokumenta'=>$dokumenta
+            'dokumenta'=>$dokumenta,
+            'logoUrl'=>$logopath
         ]);
         }
 

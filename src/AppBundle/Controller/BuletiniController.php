@@ -22,8 +22,11 @@ class BuletiniController extends controller
     public function feedBuletin(EntityManagerInterface $entityManager){
       if (( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 ))
       {
+          $logopath=$this->get('session')->get('logoPath');
+           $logopath="'uploads/logo/".$logopath."'";
 
-        $biznesId=$this->get('session')->get('loginUserId');
+
+
         $today=new \DateTime();
         $repository=$entityManager->getRepository(Tender::class);
 //        add kush qe not in this business
@@ -48,7 +51,8 @@ class BuletiniController extends controller
       }
 
         return $this->render('feed.html.twig', [
-            'tenderat'=>$tenderFeed
+            'tenderat'=>$tenderFeed,
+            'logoUrl'=>$logopath
         ]);
 
 

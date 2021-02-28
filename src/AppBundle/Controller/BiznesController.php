@@ -74,6 +74,6 @@ class BiznesController extends Controller
      */
     public function indexPublic(Request $request)
     {
-        return $this->renderView('public/index.html.twig');
+        return $this->renderView('login.html.twig');
     }
 }
