@@ -1,6 +1,5 @@
 {% extends 'home.html.twig' %}
 {% block bodymain %}
-<h1> Ofertat :</h1>
 <h2> Tenderi:</h2>
 <table class="table">
     <tbody>
@@ -55,12 +54,10 @@
         <td>{{ oferta.vlefta }}</td>
         <td>{{ oferta.adresa_dorezimit }}</td>
         <td>{{ oferta.emer_biznesi }}</td>
-        <td><button type="button" class="btn btn-outline-info">
-                <a href="{{ path('Modifiko_Oferten', {'id': oferta.OfertaId}) }}">Modifiko</a>
-                {#                    </a>#}
-            </button>
+        <td><a href="{{ path('detaje_oferte', {'id': oferta.OfertaId}) }}"><button type="button" class="btn btn-secondary">
+                Shiko Detajet e Ofertes</button></a>
 
-        <td><button><a href="">Shpall Fitues</a></button></td>
+        <td><button type="button" class="btn btn-success">Shpall Fitues</button></td>
     </tr>
 {% else %}
     <tr>

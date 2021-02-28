@@ -73,6 +73,7 @@ class OfertaController extends  Controller
                 'form' => $form->createView(),
                 'tender'=>$tender ]);
     }
+
     /**
      * @Route("/ofertat_e_mia", name="ofertat_e_mia")
      */
@@ -107,6 +108,44 @@ oferta.vlefta as VleraOferte,
         ]);
     }
 
+    /**
+     * @Route("/shiko_oferten/{id}", name="detaje_oferte")
+     */
+    public function shikoOferten(Request $request,EntityManagerInterface  $entityManager, Oferta $oferta)
+    {
+        if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
+            $biznesId = $this->get('session')->get('loginUserId');
+            $repository = $entityManager->getRepository(Oferta::class);
+            $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+            $businesId = $this->get('session')->get('loginUserId');
+
+            $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
+                ->andWhere('dok.ofertaId=:idOferte')
+                ->setParameter('idOferte', $oferta->getId())
+                ->getQuery()
+                ->getResult();
+
+            $ofertaQuery="SELECT oferta.id as ofertaId,
+                            oferta.vlefta as VleraOferte, 
+                            oferta.pershkrimi as Pershkrim,
+                            oferta.adresa_dorezimit as Adresa 
+                          From oferta    
+                          where oferta.id=:ofertaId
+                          and  oferta.is_deleted=0;" ;
+            $statement = $entityManager->getConnection()->prepare($ofertaQuery);
+
+            $statement->execute(array('ofertaId'=>$oferta->getId()));
+            $oferta = $statement->fetchAll();
+
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('oferta/ofertadetajuar.html.twig',[
+            'oferta' =>$oferta,
+            'dokumenta'=>$dokumenta
+        ]);
+    }
 
     /**
      * @Route("/modifikoOferten/{id}", name="Modifiko_Oferten")
@@ -132,8 +171,6 @@ oferta.vlefta as VleraOferte,
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($oferte);
             $entityManager->flush();
-
-
 
             $uploads_directory = $this->getParameter('uploads_directory');
             $files = $request->files->get('oferta')['document'];

@@ -78,21 +78,19 @@
     <table class="table">
         <thead>
         <tr>
-                        <th>Id</th>
+            <th>Id</th>
             <th>TitullThirrje</th>
              <th>FondLimit</th>
              <th>DataPerfundimit</th>
              <th>EmerStatusi</th>
              <th>Nr Aplikimesh</th>
-            {#           <th>BiznesIdId</th>#}
-            {#            <th>TenderId</th>#}
             <th>actions</th>
         </tr>
         </thead>
         <tbody>
         {% for tender in tenderInaktiv %}
             <tr>
-                                <td>{{ tender.id }}</td>
+                <td>{{ tender.id }}</td>
                 <td>{{ tender.titullThirrje }}</td>
                 <td>{{ tender.fondLimit }}</td>
                 <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>

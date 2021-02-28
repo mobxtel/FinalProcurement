@@ -19,18 +19,18 @@
             <td>{{ oferta.titullTender }}</td>
             <td>{{ oferta.VleraOferte }}</td>
             <td>{{ oferta.dataMbylljeTender }}</td>
-        <td>{{ oferta.statusTender }}</td>
-        <td>{{ oferta.vendimi }}</td>
-            <td><button type="button" class="btn btn-outline-info">
-             <a href="{{ path('Modifiko_Oferten', {'id': oferta.id}) }}">Modifiko</a>
-                    </a>
-                </button>
+            <td>{{ oferta.statusTender }}</td>
+            <td>{{ oferta.vendimi }}</td>
+            <td>
+                <a href="{{ path('Modifiko_Oferten', {'id': oferta.id}) }}">
+                    <button type="button" class="btn btn-outline-info">Modifiko</button>
+                </a>
             </td>
             <td>
-                <button type="button" class="btn btn-danger">
-                    <a href="{{ path('fshiOferten', {'id': oferta.id})}}">
-               Fshi</a>
-                </button></td>
+                <a href="{{ path('fshiOferten', {'id': oferta.id})}}">
+                <button type="button" class="btn btn-danger">Fshi
+                </button></a>
+            </td>
 
 
     {% else %}
