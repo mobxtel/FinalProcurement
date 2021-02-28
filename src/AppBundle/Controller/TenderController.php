@@ -298,7 +298,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/edit.html.twig', [
             'tender' => $tender,
             'form' => $form->createView(),
-            'dokument' => $dokumenta
+            'dokumenta' => $dokumenta
         ]);
     }
 

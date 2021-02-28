@@ -3,8 +3,8 @@
         {% block bodymain %}
             {{ form_start(form) }}
             {{ form_widget(form) }}
-
-
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}
+            {{ form_end(form) }}
 
             {% for dokument in dokumenta %}
 
@@ -14,11 +14,6 @@
                     <button  class=" deleteBtn btn btn--danger btn-dark" id="{{ dokument.id }}" >Delete</button>
                 </div>
             {% endfor %}
-
-                        <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}
-            {{ form_end(form) }}
-
-
 
             {% block javascripts %}
                 <script src="{{ asset('js/jquery.js') }}"></script>
