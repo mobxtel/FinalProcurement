@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-/*
+
+/**
  * Biznes
  *
  * @ORM\Table(name="biznes")
@@ -82,18 +83,25 @@ class Biznes
     private $isDeleted;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="created_by", type="integer", nullable=true)
-     */
-    private $createdBy;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="paguar", type="boolean", nullable=false)
      */
     private $paguar;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="createdBy", type="integer", nullable=true)
+     */
+    private $createdby = 'NULL';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fushe_operimi_id", type="integer", nullable=false)
+     */
+    private $fusheOperimiId;
 
     /**
      * @var integer
@@ -104,26 +112,8 @@ class Biznes
      */
     private $id;
 
-
-
     /**
-     * Set roleId
-     *
-     * @param integer $roleId
-     *
-     * @return Biznes
-     */
-    public function setRoleId($roleId)
-    {
-        $this->roleId = $roleId;
-
-        return $this;
-    }
-
-    /**
-     * Get roleId
-     *
-     * @return integer
+     * @return int
      */
     public function getRoleId()
     {
@@ -131,22 +121,14 @@ class Biznes
     }
 
     /**
-     * Set emerBiznesi
-     *
-     * @param string $emerBiznesi
-     *
-     * @return Biznes
+     * @param int $roleId
      */
-    public function setEmerBiznesi($emerBiznesi)
+    public function setRoleId($roleId)
     {
-        $this->emerBiznesi = $emerBiznesi;
-
-        return $this;
+        $this->roleId = $roleId;
     }
 
     /**
-     * Get emerBiznesi
-     *
      * @return string
      */
     public function getEmerBiznesi()
@@ -155,22 +137,14 @@ class Biznes
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Biznes
+     * @param string $emerBiznesi
      */
-    public function setEmail($email)
+    public function setEmerBiznesi($emerBiznesi)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->emerBiznesi = $emerBiznesi;
     }
 
     /**
-     * Get email
-     *
      * @return string
      */
     public function getEmail()
@@ -179,22 +153,14 @@ class Biznes
     }
 
     /**
-     * Set nipt
-     *
-     * @param string $nipt
-     *
-     * @return Biznes
+     * @param string $email
      */
-    public function setNipt($nipt)
+    public function setEmail($email)
     {
-        $this->nipt = $nipt;
-
-        return $this;
+        $this->email = $email;
     }
 
     /**
-     * Get nipt
-     *
      * @return string
      */
     public function getNipt()
@@ -203,22 +169,14 @@ class Biznes
     }
 
     /**
-     * Set adresa
-     *
-     * @param string $adresa
-     *
-     * @return Biznes
+     * @param string $nipt
      */
-    public function setAdresa($adresa)
+    public function setNipt($nipt)
     {
-        $this->adresa = $adresa;
-
-        return $this;
+        $this->nipt = $nipt;
     }
 
     /**
-     * Get adresa
-     *
      * @return string
      */
     public function getAdresa()
@@ -227,22 +185,14 @@ class Biznes
     }
 
     /**
-     * Set logo
-     *
-     * @param string $logo
-     *
-     * @return Biznes
+     * @param string $adresa
      */
-    public function setLogo($logo)
+    public function setAdresa($adresa)
     {
-        $this->logo = $logo;
-
-        return $this;
+        $this->adresa = $adresa;
     }
 
     /**
-     * Get logo
-     *
      * @return string
      */
     public function getLogo()
@@ -251,23 +201,15 @@ class Biznes
     }
 
     /**
-     * Set numerTelefoni
-     *
-     * @param integer $numerTelefoni
-     *
-     * @return Biznes
+     * @param string $logo
      */
-    public function setNumerTelefoni($numerTelefoni)
+    public function setLogo($logo)
     {
-        $this->numerTelefoni = $numerTelefoni;
-
-        return $this;
+        $this->logo = $logo;
     }
 
     /**
-     * Get numerTelefoni
-     *
-     * @return integer
+     * @return int
      */
     public function getNumerTelefoni()
     {
@@ -275,22 +217,14 @@ class Biznes
     }
 
     /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return Biznes
+     * @param int $numerTelefoni
      */
-    public function setPassword($password)
+    public function setNumerTelefoni($numerTelefoni)
     {
-        $this->password = $password;
-
-        return $this;
+        $this->numerTelefoni = $numerTelefoni;
     }
 
     /**
-     * Get password
-     *
      * @return string
      */
     public function getPassword()
@@ -299,110 +233,109 @@ class Biznes
     }
 
     /**
-     * Set aktiv
-     *
-     * @param boolean $aktiv
-     *
-     * @return Biznes
+     * @param string $password
      */
-    public function setAktiv($aktiv)
+    public function setPassword($password)
     {
-        $this->aktiv = $aktiv;
-
-        return $this;
+        $this->password = $password;
     }
 
     /**
-     * Get aktiv
-     *
-     * @return boolean
+     * @return bool
      */
-    public function getAktiv()
+    public function isAktiv()
     {
         return $this->aktiv;
     }
 
     /**
-     * Set isDeleted
-     *
-     * @param boolean $isDeleted
-     *
-     * @return Biznes
+     * @param bool $aktiv
      */
-    public function setIsDeleted($isDeleted)
+    public function setAktiv($aktiv)
     {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
+        $this->aktiv = $aktiv;
     }
 
     /**
-     * Get isDeleted
-     *
-     * @return boolean
+     * @return bool
      */
-    public function getIsDeleted()
+    public function isDeleted()
     {
         return $this->isDeleted;
     }
 
     /**
-     * Set createdBy
-     *
-     * @param integer $createdBy
-     *
-     * @return Biznes
+     * @param bool $isDeleted
      */
-    public function setCreatedBy($createdBy)
+    public function setIsDeleted($isDeleted)
     {
-        $this->createdBy = $createdBy;
-
-        return $this;
+        $this->isDeleted = $isDeleted;
     }
 
     /**
-     * Get createdBy
-     *
-     * @return integer
+     * @return bool
      */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set paguar
-     *
-     * @param boolean $paguar
-     *
-     * @return Biznes
-     */
-    public function setPaguar($paguar)
-    {
-        $this->paguar = $paguar;
-
-        return $this;
-    }
-
-    /**
-     * Get paguar
-     *
-     * @return boolean
-     */
-    public function getPaguar()
+    public function isPaguar()
     {
         return $this->paguar;
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @param bool $paguar
+     */
+    public function setPaguar($paguar)
+    {
+        $this->paguar = $paguar;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreatedby()
+    {
+        return $this->createdby;
+    }
+
+    /**
+     * @param int $createdby
+     */
+    public function setCreatedby($createdby)
+    {
+        $this->createdby = $createdby;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFusheOperimiId()
+    {
+        return $this->fusheOperimiId;
+    }
+
+    /**
+     * @param int $fusheOperimiId
+     */
+    public function setFusheOperimiId($fusheOperimiId)
+    {
+        $this->fusheOperimiId = $fusheOperimiId;
+    }
+
+    /**
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
 }
+

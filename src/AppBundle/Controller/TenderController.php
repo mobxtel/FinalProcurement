@@ -11,6 +11,7 @@ use AppBundle\Forms\TenderAktivType;
 use AppBundle\Forms\TenderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -157,20 +158,25 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
 
                 $files = $request->files->get('tender')['document'];
                 foreach ($files as $file) {
+
                     $dokument = new Dokumenta();
-                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $filename=$file->getClientOriginalName().$file->guessExtension();
+                    $dokument->setTitullDokumenti($filename);
+//                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
                     $file->move(
                         $uploads_directory,
                         $filename
                     );
-                    $dokument->setTitullDokumenti($filename);
+//                    $dokument->setTitullDokumenti($filename);
                     $dokument->setTenderId($tender->getId());
                     $dokument->setPath($file);
                     $dokument->setIsDeleted(0);
 
-                    $dokument->setCreatedBy(1);
+                    $dokument->setCreatedBy($this->get('session')->get('loginUserId'));
+                    dump($dokument);
                     $entityManager->persist($dokument);
                     $entityManager->flush();
+
 
                 }
 
@@ -236,13 +242,13 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
             $form = $this->createForm(TenderType::class, $tender);
-            $dokumenta = new Dokumenta();
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
 
             $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
                 ->andWhere('dok.tenderId=:idTender')
                 ->setParameter('idTender', $tender->getId())
+                ->andWhere('dok.isDeleted=0')
                 ->getQuery()
                 ->getResult();
 
@@ -253,11 +259,36 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
             $form->get('fushe_operimi_id')->setData($fusheOperim);
             $form->handleRequest($request);
 
+
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $tender->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
                 $this->getDoctrine()->getManager()->flush();
+                $files = $request->files->get('tender')['document'];
+                $uploads_directory = $this->getParameter('uploads_directory');
 
+                foreach ($files as $file) {
+                    $dokument = new Dokumenta();
+
+                    $filename=$file->getClientOriginalName().$file->guessExtension();
+                    $dokument->setTitullDokumenti($filename);
+//                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move(
+                        $uploads_directory,
+                        $filename
+                    );
+                    $dokument->setTitullDokumenti($filename);
+                    $dokument->setTenderId($tender->getId());
+                    $dokument->setPath($file);
+                    $dokument->setIsDeleted(0);
+
+                    $dokument->setCreatedBy($this->get('session')->get('loginUserId'));
+                    /*dump($dokument);*/
+                    $entityManager->persist($dokument);
+                    $entityManager->flush();
+
+
+                }
                 return $this->redirectToRoute('tender_view');
             }
         }
@@ -267,7 +298,7 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         return $this->render('tender/edit.html.twig', [
             'tender' => $tender,
             'form' => $form->createView(),
-            'dokumenta' => $dokumenta
+            'dokument' => $dokumenta
         ]);
     }
 
@@ -408,13 +439,18 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
 
 
     }
-    /*
-    * @Route("/ajax_delete" ,  name="ajax_delete")
-    */
-    public function deleteF(Request $request, EntityManagerInterface $entityManager)
+    /**
+     * @Route("/ajax_delete" , name="ajax_delete")
+     */
+
+    public function deleteF(Request $request,EntityManagerInterface $entityManager)
     {
-        $dokumentFshi=request('dokumentFshire');
-        dump('test');die();
+        $dokumentFshi = $request->get('itemId');
+        $dokument = $entityManager->getRepository(Dokumenta::class)->find($dokumentFshi);
+        $dokument->setIsDeleted(1);
+        $entityManager->persist($dokument);
+        $entityManager->flush();
+        return new JsonResponse(array('message' => true));
 
 
     }

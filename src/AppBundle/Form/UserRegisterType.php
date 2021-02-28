@@ -47,6 +47,12 @@ class UserRegisterType extends AbstractType
                     ])
                 ],
             ])
+            ->add('fushe_operimi_id',EntityType::class,[
+                'class'=> FushaOperimi::class,
+                'choice_label' => 'emer fushe operimi',
+                'choice_value'=>'id'
+
+            ])
 //                ->add('fushe_operimi_id',EntityType::class,[
 //                    'class'=> FushaOperimi::class,
 //                    'choice_label' => 'emer fushe operimi',

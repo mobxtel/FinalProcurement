@@ -111,14 +111,20 @@ oferta.vlefta as VleraOferte,
     /**
      * @Route("/modifikoOferten/{id}", name="Modifiko_Oferten")
      */
-    public function modifikoOferten(Request $request, Oferta $oferte)
+    public function modifikoOferten(Request $request, Oferta $oferte,EntityManagerInterface $entityManager)
     {
 
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4))
         {
         $form = $this->createForm(OfertaType::class, $oferte);
         $form->handleRequest($request);
-
+           $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+            $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
+                ->andWhere('dok.ofertaId=:idOferte')
+                ->setParameter('idOferte', $oferte->getId())
+                ->andWhere('dok.isDeleted=0')
+                ->getQuery()
+                ->getResult();
 
 
         if($form->isSubmitted() && $form->isValid()){
@@ -128,30 +134,37 @@ oferta.vlefta as VleraOferte,
             $entityManager->flush();
 
 
+
             $uploads_directory = $this->getParameter('uploads_directory');
-            $files = $request->files->get('edito_form')['my_files'];
+            $files = $request->files->get('oferta')['document'];
             $oferteid = $oferte->getId();
 
             foreach ($files as $file)
             {
-                $dokumenta = new Dokumenta();
-                $filename= $file->getClientOriginalName();
+                $dokument = new Dokumenta();
+                $filename=$file->getClientOriginalName().$file->guessExtension();
                 $file->move(
                     $uploads_directory,
                     $filename);
-                $RAW_QUERY2 = "UPDATE dokumenta SET dokumenta.titull_dokumenti = 
-                                '$filename' , dokumenta.path= '$uploads_directory'
-                              WHERE dokumenta.oferta_id = '$oferteid' ";
-                $statement = $entityManager->getConnection()->prepare($RAW_QUERY2);
-                $statement->execute();
+                $dokument->setTitullDokumenti($filename);
+                $dokument->setOfertaId($oferte->getId());
+                $dokument->setPath($file);
+                $dokument->setIsDeleted(0);
+
+                $dokument->setCreatedBy($this->get('session')->get('loginUserId'));
+//                dump($dokument);die();
+                $entityManager->persist($dokument);
+                $entityManager->flush();
             }
 
 
-            return $this->redirectToRoute('Oferte_e_detajuar');
-            //return $this->render('Oferta/showoferta.html.twig');
+            return $this->redirectToRoute('ofertat_e_mia');
+            //return $this->render('Oferta/showofertashowoferta.html.twig');
         }
-        return $this->render('Oferta/showoferta.html.twig', array(
-            'form' => $form->createView()));
+        return $this->render('Oferta/showoferta.html.twig', [
+            'form' => $form->createView(),
+            'dokumenta'=>$dokumenta
+        ]);
         }
 
         else{

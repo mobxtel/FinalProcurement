@@ -4,26 +4,28 @@
         <div class="p-4 pt-5">
             <a href="#" class="img logo rounded-circle mb-5" style="background-image: url({{ asset('images/logo.jpg') }});"></a>
             <ul class="list-unstyled components mb-5">
-{#                <li>#}
-{#                    <a href="{{ path('feed') }}">Feed</a>#}
-{#                </li>#}
-                <li>
-                    <a href="{{ path('tender_krijo') }}">Tender Krijo</a>
-                </li>
-                <li>
-                    <a href="{{ path('tender_view') }}">Shiko Tenderat e Mi</a>
-                </li>
 
                 <li>
                     <a href="{{  path('buletini')}}">Buletini</a>
-                    <li>
+                <li>
+{#                <li>#}
+{#                    <a href="{{ path('feed') }}">Feed</a>#}
+{#                </li>#}
+               <ul>
+                <li>
+                    <a href="{{ path('tender_view') }}">Shiko Tenderat e Mi</a>
+                </li>
+                   <li>
+                       <a href="{{ path('tender_krijo') }}">Tender Krijo</a>
+                   </li>
+               </ul>
                     <a href="{{ path('ofertat_e_mia') }}">Ofertat e mia</a>
                     </li>
 
 
 
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="#">Çëshjte</a>
                 </li>
 
             </ul>
@@ -32,10 +34,7 @@
         <div class="footer"></div>
     </nav>
     <div id="content" class="p-4 p-md-5">
-        <h1>
-{#            <a href="{{ path('feed') }}"></a>#}
-            Go to Feed
-        </h1>
+        <h1>Oferto.al</h1>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -43,8 +42,10 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle Menu</span>
                 </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
+{#                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">#}
+{#                    <i class="fa fa-bars"></i>#}
+{#                </button>#}
             </div>
         </nav>
+{#    </div>#}
+{#</div>#}

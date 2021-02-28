@@ -40,22 +40,24 @@ class BiznesController extends Controller
            $biznes->setLogo($newFilename);
            $biznes->setNumerTelefoni($form->getData()->getNumerTelefoni());
            $biznes->setPassword(base64_encode($form->getData()->getPassword()));
-
            $biznes->setAktiv(0);
            $biznes->setIsDeleted(0);
            $biznes->setPaguar(1);
+           $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+
            if ($this->get('session')->get('loginUserId') != null){
                $biznes->setCreatedBy($this->get('session')->get('loginUserId'));
-//               $biznesFusheOp->setFushaOperimi($form->get('fushe_operimi_id')->getData()->getId());
-//               $biznesFusheOp->setBiznes($biznes->getId());
            }
+
            $entityManager->persist($biznes);
            $entityManager->flush();
-         return $this->redirectToRoute('login');
+
+         return $this->redirectToRoute('homepage');
         }
 
         return $this->render('regjistrim.html.twig', [
             'form' => $form->createView(),
+
         ]);
     }
     

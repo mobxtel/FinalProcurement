@@ -10,61 +10,6 @@
         {{ button_label|default('Save') }}
     </button>
 {{ form_end(form) }}
-{#{% if dokumenta != "" %}#}
-{#           </a>#}
-  {#  {% for dokument in dokumenta %}#}
-{#           </a>#}
-
-{#        <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">#}
-{#           </a>#}
- {#       <div>#}
-{#           </a>#}
- {#          {{''~ dokument.titullDokumenti|e }}#}
-  {#      <button class="btn" onclick="deleteAction({{ dokument.id }})" >Delete</button>#}
-
- {#       </div>#}
-  {#  {% endfor %}#}
-{#{% endif %}#}
-
-    <script>
-        function deleteAction(dokumentId) {
-            $.ajax({
-                url: "/ajax_delete",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "dokumentFshire": dokumentId
-                },
-                async: true,
-                success: function (data)
-                {
-                    console.log(data)
-                }
-
-
-
-            })
-
-        }
-        {#$('.btn').click( function(){#}
-
-        {#    $.ajax({#}
-        {#        url: "/ajax_delete",#}
-        {#        type: "POST",#}
-        {#        dataType: "json",#}
-        {#        data: {#}
-        {#            "dokumentFshire": {{ dokument.id }}#}
-        {#        },#}
-        {#        async: true,#}
-        {#        success: function (data)#}
-        {#        {#}
-        {#            console.log(data)#}
-        {#        }#}
-        {#    })#}
-        {#});#}
-
-    </script>
-
 
 
 
