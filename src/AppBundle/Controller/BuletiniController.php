@@ -30,6 +30,16 @@ class BuletiniController extends controller
         $today=new \DateTime();
         $repository=$entityManager->getRepository(Tender::class);
 //        add kush qe not in this business
+
+          $Query="SELECT emer_biznesi 
+                    From biznes
+                    Where biznes.id=:biznesID ";
+          $statement = $entityManager->getConnection()->prepare($Query);
+          $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+
+          $profili = $statement->fetchAll();
+          $biznesName= $profili[0]["emer_biznesi"];
+
         $query="SELECT tender.id, tender.titull_thirrje, tender.pershkrim,
                tender.fond_limit, tender.data_perfundimit, tender.biznes_id,
                fusha_operimi.emer_fushe_operimi, biznes.emer_biznesi 
@@ -39,7 +49,8 @@ class BuletiniController extends controller
               ON tender.fushe_operimi_id=fusha_operimi.id 
               WHERE tender.emer_statusi='aktiv' 
               AND tender.is_deleted=0 
-              AND tender.data_perfundimit>= DATE_ADD(CURDATE(), INTERVAL 1 DAY)";
+              AND tender.data_perfundimit>= DATE_ADD(CURDATE(), INTERVAL 1 DAY)
+              ORDER by tender.id , tender.id DESC";
 
         $statement = $entityManager->getConnection()->prepare($query);
         $statement->execute();
@@ -52,7 +63,8 @@ class BuletiniController extends controller
 
         return $this->render('feed.html.twig', [
             'tenderat'=>$tenderFeed,
-            'logoUrl'=>$logopath
+            'logoUrl'=>$logopath,
+            'biznesName'=>$biznesName
         ]);
 
 

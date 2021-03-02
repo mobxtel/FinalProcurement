@@ -108,13 +108,14 @@ class BiznesController extends Controller
 
             $statement->execute(array('biznesID'=>$biznesId));
             $profili = $statement->fetchAll();
-//            dump($profili);die();
+            $biznesName= $profili[0]["emer_biznesi"];
 
             return $this->render('profili.html.twig', [
                 'profili' => $profili[0],
                 'logoUrl'=>$logopath,
                 'logo'=>$logo,
-                'biznesId'=>$biznesId
+                'biznesId'=>$biznesId,
+                'biznesName'=>$biznesName
             ]);
         }
         else{
@@ -132,6 +133,14 @@ class BiznesController extends Controller
             $logopath=$this->get('session')->get('logoPath');
             $logopath="'/uploads/logo/".$logopath."'";
             $logo=  $this->get('session')->get('logoPath');
+
+            $Query="SELECT emer_biznesi 
+                    From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$biznesId));
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
 
             $biznes->setLogo('');
             $form = $this->createForm(BiznesType::class, $biznes);
@@ -170,7 +179,8 @@ class BiznesController extends Controller
             return $this->render('profili_modifikim.html.twig', [
                 'form' => $form->createView(),
                 'logoUrl'=>$logopath,
-                'logo'=>$logo
+                'logo'=>$logo,
+                'biznesName'=>$biznesName
 
 
 

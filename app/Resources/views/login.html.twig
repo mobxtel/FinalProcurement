@@ -17,11 +17,13 @@
                     </div>
 
 
-                    <div class="form-check">
+                    <div class="">
                         {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
-                            'tag':'button','style':'width: 100%;background-color:#FFC107'}})}}
+                            'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
                     </div>
-                    <a href="{{ path('regjistohu') }}">Regjistrohu ne Sistem</a>
+                    <div  class="d-flex justify-content-center">
+                    <a href="{{ path('regjistohu') }}" style="color:#FFC107">Regjistrohu ne Sistem</a>
+                    </div>
                 </div>
 
             </div>

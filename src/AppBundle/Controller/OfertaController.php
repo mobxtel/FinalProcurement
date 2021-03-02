@@ -31,6 +31,15 @@ class OfertaController extends  Controller
             $logopath=$this->get('session')->get('logoPath');
             $logopath="'/uploads/logo/".$logopath."'";
             $user = $this->get('session')->get('loginUserId');
+
+            $Query="SELECT emer_biznesi 
+                    From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>  $this->get('session')->get('loginUserId')));
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
+
             $oferta = new Oferta();
             $dokument = new Dokumenta();
             $form = $this->createForm(OfertaType::class);
@@ -74,7 +83,10 @@ class OfertaController extends  Controller
  return $this->render('oferta/aplikim.html.twig',[
                 'form' => $form->createView(),
                 'tender'=>$tender,
-                'logoUrl'=>$logopath]);
+                'logoUrl'=>$logopath,
+//     ,
+                'biznesName'=>$biznesName
+ ]);
     }
 
     /**
@@ -88,6 +100,14 @@ class OfertaController extends  Controller
 
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
+
+            $Query="SELECT emer_biznesi 
+            From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+            $profili = $statement->fetchAll();
+//            $biznesName= $profili->getEmerBiznesi();
 
             $ofertaQuery="SELECT oferta.id as ofertaId, 
                 oferta.vlefta as VleraOferte, 
@@ -104,6 +124,13 @@ class OfertaController extends  Controller
 
             $statement->execute(array('biznesId' => $biznesId));
             $ofertat = $statement->fetchAll();
+            $Query="SELECT emer_biznesi 
+                    From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$biznesId));
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
 
         }
         else{
@@ -111,7 +138,9 @@ class OfertaController extends  Controller
         }
         return $this->render('oferta/ofertatemia.html.twig',[
             'oferta' =>$ofertat,
-            'logoUrl'=>$logopath
+            'logoUrl'=>$logopath,
+//            ,
+            'biznesName'=>$biznesName
         ]);
     }
 
@@ -129,9 +158,19 @@ class OfertaController extends  Controller
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
 
+            $Query="SELECT emer_biznesi 
+            From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
+
             $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
                 ->andWhere('dok.ofertaId=:idOferte')
                 ->setParameter('idOferte', $oferta->getId())
+                ->andWhere('dok.isDeleted=0')
                 ->getQuery()
                 ->getResult();
 
@@ -155,6 +194,8 @@ class OfertaController extends  Controller
             'oferta' =>$oferta,
             'dokumenta'=>$dokumenta,
             'logoUrl'=>$logopath
+            ,
+            'biznesName'=>$biznesName
         ]);
     }
 
@@ -168,6 +209,14 @@ class OfertaController extends  Controller
         {
             $logopath=$this->get('session')->get('logoPath');
             $logopath="'/uploads/logo/".$logopath."'";
+            $Query="SELECT emer_biznesi 
+                    From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
 
             $form = $this->createForm(OfertaType::class, $oferte);
             $form->handleRequest($request);
@@ -218,6 +267,8 @@ class OfertaController extends  Controller
             'form' => $form->createView(),
             'dokumenta'=>$dokumenta,
             'logoUrl'=>$logopath
+            ,
+            'biznesName'=>$biznesName
         ]);
         }
 
@@ -235,6 +286,7 @@ class OfertaController extends  Controller
             $entityManager->getRepository(Oferta::class);
             $oferta->setIsDeleted(1);
             $entityManager->persist($oferta);
+//            dump($oferta);die();
             $entityManager->flush();
             return $this->redirectToRoute('ofertat_e_mia');
         } else {

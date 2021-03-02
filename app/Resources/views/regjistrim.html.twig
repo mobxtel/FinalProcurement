@@ -10,7 +10,9 @@
                                 <b>Keni LLogari?</b>
                             </div>
                             <div class="col-6">
-                                <a href="{{ path('homepage') }}">Kycu ne sistem</a>
+                                <div class="d-flex justify-content-center">
+                                <a href="{{ path('homepage') }}" style="color:#FFC107"> Kycu ne sistem</a>
+                                </div>
                             </div>
 
                     </div>
@@ -73,7 +75,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                {{ form_row(form.password,{'attr': {'class': 'input--style-4'}})}}
+                                {{ form_row(form.password)}}
 {#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Fjalekalim">#}
 
                             </div>
@@ -88,6 +90,7 @@
 
                             </div>
                         </div>
+
                         <div class="col-6">
                             <div class="input-group">
 {#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="ReType">#}
