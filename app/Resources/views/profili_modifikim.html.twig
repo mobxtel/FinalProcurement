@@ -1,0 +1,14 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block bodymain %}
+
+Imazh i vjeter:    <img   class="img logo rounded-circle"  style="height:180px; width:180px" src="{{ asset('uploads/logo/' ~ logo ~ '') }}">
+
+    {{ form_start(form) }}
+{{ form_widget(form) }}
+
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+{% endblock %}

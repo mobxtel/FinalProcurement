@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Dokumenta;
 use AppBundle\Entity\FushaOperimi;
+use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Tender;
 use AppBundle\Forms\TenderAktivType;
 use AppBundle\Forms\TenderType;
@@ -26,7 +27,7 @@ class TenderController extends Controller
 
             $biznesId = $this->get('session')->get('loginUserId');
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
 
             $statusDraft = "draft";
             $today = new \DateTime();
@@ -59,16 +60,16 @@ class TenderController extends Controller
                 ->getResult();
 
             $tenderAktivQuery = "
-SELECT tender.id as id,
-COUNT(oferta.id)as nrAplikimesh , 
-tender.titull_thirrje as titullThirrje, 
-tender.fond_limit as fondLimit, 
-tender.emer_statusi as emerStatusi, 
-oferta.id as ofertaID, 
-tender.data_perfundimit as dataPerfundimit 
-FROM oferta right join tender on oferta.tender_id=tender.id WHERE tender.is_deleted=0 
-And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.id;
-";
+                SELECT tender.id as id,
+                COUNT(oferta.id)as nrAplikimesh , 
+                tender.titull_thirrje as titullThirrje, 
+                tender.fond_limit as fondLimit, 
+                tender.emer_statusi as emerStatusi, 
+                oferta.id as ofertaID, 
+                tender.data_perfundimit as dataPerfundimit 
+                FROM oferta right join tender on oferta.tender_id=tender.id WHERE tender.is_deleted=0 
+                And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.id;
+                ";
             $statement = $entityManager->getConnection()->prepare($tenderAktivQuery);
 
             $statement->execute(array('biznesId' => $biznesId));
@@ -86,13 +87,13 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
 ////        dump($tendersAktiv);die();
 
             $tenderInaktivvQuery = "SELECT tender.id as id,
-                COUNT(*) as nrAplikimesh,
+                COUNT(oferta.id) as nrAplikimesh,
            
                 tender.titull_thirrje as titullThirrje, 
                 tender.fond_limit as fondLimit,
                 tender.emer_statusi as emerStatusi,
                 tender.data_perfundimit as dataPerfundimit FROM oferta
-                inner join tender on  oferta.tender_id=tender.id
+                right join tender on  oferta.tender_id=tender.id
                 WHERE tender.is_deleted=0 
                 And tender.emer_statusi='inaktiv'
                 And tender.biznes_id=:biznesId
@@ -130,8 +131,10 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function tenderKrijo(Request $request)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
+
             $tender = new Tender();
             $dokument = new Dokumenta();
             $form = $this->createForm(TenderType::class);
@@ -208,8 +211,10 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function shikoDetajet(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
+
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
+
             $dokumenta = new Dokumenta();
             $repository = $entityManager->getRepository(FushaOperimi::class);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -249,8 +254,10 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     public function modifikoDraft(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
+
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
+
             $form = $this->createForm(TenderType::class, $tender);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
@@ -321,13 +328,17 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
 
 //        Beje Aktive
             $tender->setDataFillimit(new \DateTime());
             $tender->setEmerStatusi('aktiv');
             $this->getDoctrine()->getManager()->flush();
 
+//            $this->addFlash(
+//                'success',
+//                'Ju keni publikuar:'.$tender->getTitullThirrje().'!'
+//            );
             return $this->redirectToRoute('tender_view');
         }
         else{
@@ -344,7 +355,8 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
+
             $form = $this->createForm(TenderAktivType::class);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -411,11 +423,12 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
 
             $logopath=$this->get('session')->get('logoPath');
-            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
             $ofertatQuery="SELECT oferta.id as 'OfertaId',
                      oferta.pershkrimi as 'OfertaPershkrim', 
                      oferta.vlefta, 
                      oferta.adresa_dorezimit, 
+                     oferta.vendimi,
                      tender.id as 'tenderId', 
                      tender.pershkrim, 
                      biznes.id as 'biznesId', 
@@ -471,6 +484,36 @@ And tender.emer_statusi='aktiv' And tender.biznes_id=:biznesId Group by tender.i
         $entityManager->persist($dokument);
         $entityManager->flush();
         return new JsonResponse(array('message' => true));
+
+
+    }
+    /**
+     * @Route("/shpallfitues/{id}" , name="shpall_fitues")
+     */
+
+    public function shpallFitues (Request $request,EntityManagerInterface $entityManager)
+    {
+        $idOferteFituese = $request->get('id');
+        $idTender=$request->get('idTender');
+//        dump($idTender);die();
+
+        $ofertaFituese = $entityManager->getRepository(Oferta::class)->find($idOferteFituese);
+//        dump($ofertaFituese);die();
+        $ofertaFituese->setVendimi('fitues');
+        $entityManager->persist($ofertaFituese);
+        $entityManager->flush();
+
+        $updateSql="UPDATE oferta set vendimi='humbes' where tender_id=:idTender and not oferta.id=:ofertaId";
+        $statement = $entityManager->getConnection()->prepare($updateSql);
+
+        $statement->execute(array('idTender' =>$idTender,'ofertaId'=>$idOferteFituese));
+//        $ofertat = $statement->fetchAll();
+
+
+
+        return $this->redirectToRoute('shiko_ofertat_tender_aktiv',array(
+            'id'=>$idTender
+        ));
 
 
     }

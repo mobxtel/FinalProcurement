@@ -1,6 +1,6 @@
 {% extends 'home.html.twig' %}
 {% block bodymain %}
-    <h1>Details</h1>
+    <h1>Detaje Tenderi</h1>
 
     <table class="table">
         <tbody>
@@ -46,10 +46,23 @@
             <th>Fushe Operimi</th>
             <td>{{ fusheOperimi }}</td>
         </tr>
+        <tr>
+            <th>Dokumenta</th>
+        </tr>
+
+
+    {% for dokument in dokumenta %}
+        </tr>
+        <th>   {{dokument.titullDokumenti|e }}</th>
+        <td> <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+                <button class="btn btn-success"> Shiko Dokumentin  </button></a>
+        </td>
+        </tr>
+    {% else %}
+    <tr>
+        <td colspan="15">Nuk ka dokumenta</td>
+    </tr>
+    {% endfor %}
         </tbody>
     </table>
-    {% for dokument in dokumenta %}
-<a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
-        <li>{{''~ dokument.titullDokumenti|e }}</li>
-    {% endfor %}
 {% endblock %}

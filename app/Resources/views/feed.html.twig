@@ -3,10 +3,10 @@
 {% block bodymain %}
 
 
-
+    <div class="row col-12 ">
    {% for tender in tenderat %}
-      <div class="row col-lg-12 col-md-12">
-    <div class="card" style="width: 100%; margin-bottom: 15px">
+        <div class="row col-4 ">
+    <div class="card" style="width: 22rem; margin-bottom: 15px">
         <div class="card-body">
             <h4>Id: {{ tender.id }}</h4>
             <h5 class="card-title"><b>Titull Thirrje: </b>{{ tender.titull_thirrje }}</h5>
@@ -40,9 +40,7 @@
               <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"
                         aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>
             <a href="{{ path('oferto',{'id':tender.id }) }}">
-                <button id="sidebarCollapse" class="btn btn-primary" >
-                Apliko</a>
-          </button>
+                <button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>
 
 {#            <div class="col">#}
 {#                <div class="collapse multi-collapse" id="multiCollapseExample2">#}
@@ -56,6 +54,7 @@
 {#            <a href="#" class="card-link">Another link</a>#}
         </div>
     </div>
+        </div>
 
 {% endfor %}
     </div>

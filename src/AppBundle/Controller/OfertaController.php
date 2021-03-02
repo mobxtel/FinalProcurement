@@ -29,7 +29,7 @@ class OfertaController extends  Controller
 //            && ($this->get('session')->get('roleId') != 4)
              ){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
             $user = $this->get('session')->get('loginUserId');
             $oferta = new Oferta();
             $dokument = new Dokumenta();
@@ -84,13 +84,13 @@ class OfertaController extends  Controller
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
 
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
 
             $ofertaQuery="SELECT oferta.id as ofertaId, 
-oferta.vlefta as VleraOferte, 
+                oferta.vlefta as VleraOferte, 
                 tender.emer_statusi as statusTender, 
                 tender.data_perfundimit as dataMbylljeTender, 
                 oferta.vendimi as vendimi, 
@@ -122,7 +122,8 @@ oferta.vlefta as VleraOferte,
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
+            $logopath="'/uploads/logo/".$logopath."'";
+
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -166,10 +167,13 @@ oferta.vlefta as VleraOferte,
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4))
         {
             $logopath=$this->get('session')->get('logoPath');
-            $logopath=$this->getParameter('logo_directory')."'uploads/logo/".$logopath."'";
-        $form = $this->createForm(OfertaType::class, $oferte);
-        $form->handleRequest($request);
-           $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+            $logopath="'/uploads/logo/".$logopath."'";
+
+            $form = $this->createForm(OfertaType::class, $oferte);
+            $form->handleRequest($request);
+
+            $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
+
             $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
                 ->andWhere('dok.ofertaId=:idOferte')
                 ->setParameter('idOferte', $oferte->getId())

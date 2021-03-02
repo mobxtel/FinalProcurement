@@ -3,9 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\BiznesFushaOperimi;
+use AppBundle\Entity\Dokumenta;
+use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Role;
+use AppBundle\Form\BiznesType;
 use AppBundle\Form\LoginAdminType;
+use AppBundle\Form\OfertaType;
 use AppBundle\Form\UserRegisterType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,9 +33,11 @@ class BiznesController extends Controller
         if ($form->isValid() && $form->isSubmitted()){
         
            $logo = $form->get('logo')->getData();
+
            $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
            $newFilename = $originalFilename.'-'.uniqid().'.'.$logo->guessExtension();
            $logo->move($this->getParameter('logo_directory'), $newFilename);
+
            $entityManager = $this->getDoctrine()->getManager();
            $biznes->setEmerBiznesi($form->getData()->getEmerBiznesi());
            $biznes->setRoleId(3);
@@ -67,7 +74,7 @@ class BiznesController extends Controller
     public function logoutAction(Request $request)
     {
         $this->get('session')->clear();
-        return $this->redirectToRoute('publicHomepage');
+        return $this->redirectToRoute('homepage');
     }
     /**
      * @Route("/publicHomepage", name="publicHomepage")
@@ -76,4 +83,102 @@ class BiznesController extends Controller
     {
         return $this->renderView('login.html.twig');
     }
+    /**
+     * @Route("/profili", name="profili")
+     */
+    public function profili(Request $request,EntityManagerInterface $entityManager)
+    {
+        if(($this->get('session')->get('loginUserId') != null) ){
+
+            $biznesId=$this->get('session')->get('loginUserId');
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'/uploads/logo/".$logopath."'";
+            $logo=  $this->get('session')->get('logoPath');
+
+            $Query="SELECT emer_biznesi , 
+                    email as email, 
+                    nipt as nipt, 
+                    adresa, logo, numer_telefoni, 
+                    fushe_operimi_id, 
+                    fusha_operimi.emer_fushe_operimi 
+                    From biznes 
+                    Left join fusha_operimi on biznes.fushe_operimi_id=fusha_operimi.id
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+
+            $statement->execute(array('biznesID'=>$biznesId));
+            $profili = $statement->fetchAll();
+//            dump($profili);die();
+
+            return $this->render('profili.html.twig', [
+                'profili' => $profili[0],
+                'logoUrl'=>$logopath,
+                'logo'=>$logo,
+                'biznesId'=>$biznesId
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+    }
+    /**
+     * @Route("/profili/{id}/modifiko", name="modifiko_profil")
+     */
+    public function profiliModifiko(Request $request,EntityManagerInterface $entityManager,Biznes $biznes)
+    {
+        if(($this->get('session')->get('loginUserId') != null) ){
+
+            $biznesId=$this->get('session')->get('loginUserId');
+            $logopath=$this->get('session')->get('logoPath');
+            $logopath="'/uploads/logo/".$logopath."'";
+            $logo=  $this->get('session')->get('logoPath');
+
+            $biznes->setLogo('');
+            $form = $this->createForm(BiznesType::class, $biznes);
+            $form->handleRequest($request);
+            $form->get('password')->getData();
+            if($form->isSubmitted() && $form->isValid()) {
+
+                $logo = $form->get('logo')->getData();
+
+                $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$logo->guessExtension();
+                $logo->move($this->getParameter('logo_directory'), $newFilename);
+
+                $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+
+                $entityManager = $this->getDoctrine()->getManager();
+//                dump($biznes);die();
+                $biznes->setEmerBiznesi($form->getData()->getEmerBiznesi());
+                $biznes->setRoleId(3);
+                $biznes->setEmail($form->getData()->getEmail());
+                $biznes->setNipt($form->getData()->getNipt());
+                $biznes->setAdresa($form->getData()->getAdresa());
+                $biznes->setLogo($newFilename);
+                $biznes->setNumerTelefoni($form->getData()->getNumerTelefoni());
+                $biznes->setPassword(base64_encode($form->getData()->getPassword()));
+                $biznes->setAktiv(0);
+                $biznes->setIsDeleted(0);
+                $biznes->setPaguar(1);
+                $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+//                dump($biznes);die();
+                $entityManager->persist($biznes);
+                $entityManager->flush();
+            }
+
+
+            return $this->render('profili_modifikim.html.twig', [
+                'form' => $form->createView(),
+                'logoUrl'=>$logopath,
+                'logo'=>$logo
+
+
+
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+        }
+    }
+
 }

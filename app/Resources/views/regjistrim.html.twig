@@ -10,7 +10,7 @@
                                 <b>Keni LLogari?</b>
                             </div>
                             <div class="col-6">
-                                <a>Kycu ne sistem</a>
+                                <a href="{{ path('homepage') }}">Kycu ne sistem</a>
                             </div>
 
                     </div>
@@ -99,7 +99,7 @@
                     <div class="p-t-15 col-12">
 {#                        <button class="btn btn--radius-2 btn--black" style="width: 100%" type="submit">Submit</button>#}
                         {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
-                            'tag':'button','style':'width: 100%'}})}}
+                            'tag':'button','style':'width: 100%;background-color:#FFC107'}})}}
                     </div>
                     </div>
                     {{form_end(form)}}

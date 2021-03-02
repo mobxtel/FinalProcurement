@@ -1,6 +1,6 @@
 <div class=" container-fluid" >
 <section class="login-block">
-    <div class="container">
+    <div class="container loginFormContainer">
         <div class="row  align-items-center loginForm">
             <div class=" col-md-offset-1 col-md-5  login-sec">
                 <h2 class="text-center">Hyr në sistem</h2>
@@ -18,8 +18,8 @@
 
 
                     <div class="form-check">
-                         {{form_widget(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
-                             'tag':'button'}})}}
+                        {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
+                            'tag':'button','style':'width: 100%;background-color:#FFC107'}})}}
                     </div>
                     <a href="{{ path('regjistohu') }}">Regjistrohu ne Sistem</a>
                 </div>

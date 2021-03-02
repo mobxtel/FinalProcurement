@@ -4,7 +4,9 @@
         <div class="p-4 pt-5">
             <a href="#" class="img logo rounded-circle mb-5" style="background-image: url({{ logoUrl }});"></a>
             <ul class="list-unstyled components mb-5">
-
+            <li>
+                <a href="{{ path('profili')}}">Profili im</a>
+            </li>
                 <li>
                     <a href="{{  path('buletini')}}">Buletini</a>
                 <li>
@@ -34,7 +36,6 @@
         <div class="footer"></div>
     </nav>
     <div id="content" class="p-4 p-md-5">
-        <h1>Oferto.al</h1>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -42,7 +43,8 @@
                     <i class="fa fa-bars"></i>
                     <span class="sr-only">Toggle Menu</span>
                 </button>
-                <button>
+                <h1>Oferto.al</h1>
+                <button><i class="fa fa-sign-out" aria-hidden="true"></i>
                     <a href="{{ path('logout') }}">LogOut</a>
                 </button>
 
@@ -51,5 +53,7 @@
                 {#                </button>#}
             </div>
         </nav>
+
+
 {#    </div>#}
 {#</div>#}

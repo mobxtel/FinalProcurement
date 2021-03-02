@@ -41,6 +41,7 @@
         <th>Vlera e Fondit Limit</th>
         <th>Adresa e Dorezimit</th>
         <th>Biznesi</th>
+        <th>Vendimi</th>
         <th>Shiko Detaje Oferte</th>
         <th>aktivitet</th>
 
@@ -54,9 +55,10 @@
         <td>{{ oferta.vlefta }}</td>
         <td>{{ oferta.adresa_dorezimit }}</td>
         <td>{{ oferta.emer_biznesi }}</td>
+        <td>{{ oferta.vendimi }}</td>
         <td><a href="{{ path('detaje_oferte', {'id': oferta.OfertaId}) }}"><button type="button" class="btn btn-secondary">
                 Shiko Detajet e Ofertes</button></a>
-        <td><button type="button" class="btn btn-success">Shpall Fitues</button></td>
+        <td><a href="{{ path('shpall_fitues',{'id':oferta.OfertaId,'idTender':tender.Id}) }}"><button type="button" class="btn btn-success">Shpall Fitues</button></A></td>
     </tr>
 {% else %}
     <tr>
