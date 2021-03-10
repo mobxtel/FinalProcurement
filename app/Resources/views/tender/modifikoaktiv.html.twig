@@ -1,0 +1,22 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+{% block title %}Modifiko Daten e Perfundimit{% endblock %}
+
+{% block bodymain %}
+    {{ tender.titullThirrje }}
+    {{ tender.pershkrim }}
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-group-toggle">
+        {{ button_label|default('Perditeso') }}
+    </button>
+
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

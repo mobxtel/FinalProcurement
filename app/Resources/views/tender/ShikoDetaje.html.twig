@@ -1,0 +1,56 @@
+{% extends 'home.html.twig' %}
+{% block bodymain %}
+    <h1>Detaje Tenderi</h1>
+
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>TitullThirrje</th>
+            <td>{{ tender.titullThirrje }}</td>
+        </tr>
+        <tr>
+            <th>Pershkrim</th>
+            <td>{{ tender.pershkrim }}</td>
+        </tr>
+        <tr>
+            <th>FondLimit</th>
+            <td>{{ tender.fondLimit }}</td>
+        </tr>
+        <tr>
+            <th>AdresaDorezimit</th>
+            <td>{{ tender.adresaDorezimit }}</td>
+        </tr>
+
+        <tr>
+            <th>DataPerfundimit</th>
+            <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Licenca</th>
+            <td>{{ tender.licenca }}</td>
+        </tr>
+        <tr>
+            <th>Fushe Operimi</th>
+            <td>{{ fusheOperimi }}</td>
+        </tr>
+        <tr>
+            <th>Dokumenta</th>
+        </tr>
+
+
+    {% for dokument in dokumenta %}
+        </tr>
+        <th>   {{dokument.titullDokumenti|e }}</th>
+        <td> <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+                <button class="btn btn-success"> Shiko Dokumentin  </button></a>
+        </td>
+        </tr>
+    {% else %}
+    <tr>
+        <td colspan="15">Nuk ka dokumenta</td>
+    </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

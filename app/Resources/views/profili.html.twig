@@ -1,0 +1,56 @@
+{% extends 'home.html.twig' %}
+{% block  bodymain %}
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col">
+                <img   class="img logo rounded-circle"  style="height:180px; width:180px" src="{{ asset('uploads/logo/' ~ logo ~ '') }}">
+                {{ biznesName }}
+            </div>
+            <div class="col-8">
+
+
+              <table class="table table-sm">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="bg-warning">Emër Biznesi</th>
+                        <td>{{ profili.emer_biznesi }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-warning">Email</th>
+                        <td>{{ profili.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-warning">NIPT</th>
+                        <td>{{ profili.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-warning">Adresa</th>
+                        <td>{{ profili.adresa }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-warning">Numër Telefoni</th>
+                        <td>{{ profili.numer_telefoni }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-warning">Fushë Operimi</th>
+                        <td>{{ profili.emer_fushe_operimi }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('modifiko_profil',{'id':biznesId}) }}" > <button class="btn badge-warning"> Modifiko</button></a>
+            </div>
+
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

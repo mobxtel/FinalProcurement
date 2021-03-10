@@ -1,0 +1,48 @@
+{% extends 'home.html.twig' %}
+{% block bodymain %}
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Pershkrim i tenderit</th>
+        <th>Vlera e Fondit Limit</th>
+        <th>Data e mbylljes se Tenderit</th>
+        <th>Statusi i Tenderit</th>
+        <th>Vendimi</th>
+        <th>Modifiko</th>
+        <th>Shiko Oferten</th>
+        <th>Fshi Oferten</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for oferta in oferta %}
+        <tr>
+            <td>{{ oferta.ofertaId }}</td>
+            <td>{{ oferta.titullTender }}</td>
+            <td>{{ oferta.VleraOferte }}</td>
+            <td>{{ oferta.dataMbylljeTender }}</td>
+            <td>{{ oferta.statusTender }}</td>
+            <td>{{ oferta.vendimi }}</td>
+            <td>
+                <a href="{{ path('Modifiko_Oferten', {'id': oferta.ofertaId}) }}">
+                    <button type="button" class="btn btn-outline-info">Modifiko</button>
+                </a>
+            </td>
+        <td>
+            <a href="{{ path('detaje_oferte', {'id': oferta.ofertaId}) }}">
+            <button type="button" class="btn btn-info">Detaje</button></a>
+        </td>
+            <td>
+                <a href="{{ path('fshiOferten', {'id': oferta.ofertaId})}}">
+                <button type="button" class="btn btn-danger">Fshi
+                </button></a>
+            </td>
+
+
+    {% else %}
+        <tr>
+            <td colspan="15">no records found</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

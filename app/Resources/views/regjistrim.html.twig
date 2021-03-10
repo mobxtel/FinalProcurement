@@ -1,0 +1,119 @@
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <div class="row col-12">
+                    <div class=" col-6">
+               `` <h2 class="title">Regjistrohu</h2>
+
+                            <div class="col-6">
+                                <b>Keni LLogari?</b>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center">
+                                <a href="{{ path('homepage') }}" style="color:#FFC107"> Kycu ne sistem</a>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class=" col-6 d-flex justify-content-end">
+                    <img src="{{ asset('images/Register.png') }}">
+                    </div>
+                </div>
+                {{form_start(form)}}
+{#                <form method="POST">#}
+                    <div class="row row-space col-12">
+
+{#                        {{form_widget(form)}}#}
+
+                        <div class="col-3">
+                            <div class="input-group">
+                                {{ form_row(form.emer_biznesi,{'attr': {'class': 'input--style-4'}}) }}
+{#                                <input class="input--style-4" type="text" name="first_name" placeholder="Emer Biznesi">#}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                {{ form_row(form.nipt,{'attr': {'class': 'input--style-4'}}) }}
+{#                                <input class="input--style-4" type="text" name="last_name" placeholder="Nipt">#}
+                            </div>
+                        </div>
+
+                    <div class="col-3">
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                    </div>
+                    <div class="row row-space col-12">
+                        <div class="col-6">
+                            <div class="input-group">
+                                {{ form_row(form.email,{'attr': {'class': 'input--style-4'}}) }}
+{#                     <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Email">#}
+
+                                </div>
+                            </div>
+
+                        <div class="col-6">
+                                <div class="input-group">
+                                    {{ form_row(form.logo,{'attr': {'class': 'input--style-4'}}) }}
+{#                                    <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Logo">#}
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    <div class="row row-space col-12">
+                        <div class="col-6">
+                            <div class="input-group">
+                                {{ form_row(form.fushe_operimi_id,{'attr': {'class': 'input--style-4'}}) }}
+
+{#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="FusheOperimi">#}
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group">
+                                {{ form_row(form.password)}}
+{#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Fjalekalim">#}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space col-12">
+                        <div class="col-6">
+                            <div class="input-group">
+                                 {{ form_row(form.numerTelefoni,{'attr': {'class': 'input--style-4'}})}}
+{#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="Nr.Telefoni">#}
+
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group">
+{#                                <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder="ReType">#}
+                                {{ form_row(form.adresa,{'attr': {'class': 'input--style-4'}})}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space col-12">
+                    <div class="p-t-15 col-12">
+{#                        <button class="btn btn--radius-2 btn--black" style="width: 100%" type="submit">Submit</button>#}
+                        {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
+                            'tag':'button','style':'width: 100%;background-color:#FFC107'}})}}
+                    </div>
+                    </div>
+                    {{form_end(form)}}
+
+{#                </form>#}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{ include('styleandjs.html.twig') }}

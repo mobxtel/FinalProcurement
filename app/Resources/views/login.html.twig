@@ -1,0 +1,43 @@
+<div class=" container-fluid" >
+<section class="login-block">
+    <div class="container loginFormContainer">
+        <div class="row  align-items-center loginForm">
+            <div class=" col-md-offset-1 col-md-5  login-sec">
+                <h2 class="text-center">Hyr në sistem</h2>
+                {{form_start(form)}}
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Username</label>
+                        {{form_widget(form.username,{'attr': {'class': 'input--style-4'}})}}
+                      
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                        {{form_widget(form.password,{'attr': {'class': 'input--style-4'}})}}
+                    </div>
+
+
+                    <div class="">
+                        {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
+                            'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
+                    </div>
+                    <div  class="d-flex justify-content-center">
+                    <a href="{{ path('regjistohu') }}" style="color:#FFC107">Regjistrohu ne Sistem</a>
+                    </div>
+                </div>
+
+            </div>
+            {{form_end(form)}}
+            <div class="col-md-6 align-items-center banner-sec">
+                <div>
+
+                    <img src="{{ asset('images/loginGirl.png') }}">
+
+                </div>
+            </div>
+        </div>
+
+</section>
+</div>
+
+{{ include('styleandjs.html.twig') }}
