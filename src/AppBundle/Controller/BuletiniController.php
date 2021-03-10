@@ -85,7 +85,8 @@ class BuletiniController extends controller
 //        $dokument->setIsDeleted(1);
 //        $entityManager->persist($dokument);
 //        $entityManager->flush();
-        return new JsonResponse(array('data' => $tenderInfo->getTitullThirrje()));
+        return new JsonResponse(array('data' => $tenderInfo->getTitullThirrje(),
+            'data2'=>$tenderInfo->getFondLimit()));
 
 
     }

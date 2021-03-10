@@ -1,5 +1,4 @@
 {% extends 'home.html.twig' %}
-
 {% block bodymain %}
     <div class="row col-12 ">
         {% for tender in tenderat %}
@@ -39,12 +38,13 @@
                 </tbody>
             </table>
             <div class="view_name"></div>
-              <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"
+                <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
+                    <button class="btn btn-primary" data-toggle="collapse"
                         aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>
-            <a href="{{ path('oferto',{'id':tender.id }) }}">
-                <button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>
-            <a  id="modalAnchor" href="#">as</a>
-            <a  id="modalAncho" data-toggle="modal" href="#" data-target="#myModal" data-tenderid="{{tender.id }}">Open Modal</a>
+                 <a href="{{ path('oferto',{'id':tender.id }) }}">
+                <button id="sidebarCollapse" class="btn btn-primary">Apliko</button></a>
+{#            <a  id="modalAnchor" href="#" data-tenderid="{{tender.id }}">as</a>#}
+                <a  class="modalAnchor" data-toggle="modal" href="#" data-target="#myModal" data-tenderid="{{tender.id }}">Open Modal</a>
 
 {#            <a  id="myBtn{{ tender.id }}"  href="#" "getInfo({{ tender.id }})">Modal Open</a>#}
 
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                 </div>
-{#                <div id="myModal" class="modal hide fade">#}
-{#                    <button> close</button>#}
-{#                 kdsjfsajkfdjkawejkewu#}
-{#                    <!-- register form here -->#}
-{#                </div>#}
+                <div id="myModal" class="modal hide fade">
+                    <button> close</button>
+                 kdsjfsajkfdjkawejkewu
+                    <!-- register form here -->
+                </div>
     </div>
         </div>
 
@@ -121,14 +121,35 @@
     }
 </style>
 
+    <script src="{{ asset('js/jquery.js') }}"></script>
 
     <script>
 
-        $( document ).ready(function()
+        $(document).ready(function()
         {
-            $('#modalAnchor').click(function () {
-                alert ('Anna')
+            $('.modalAnchor').click(function () {
 
+                // var elem=document.getElementById('modalAnchor');
+                var value=$(this).data('tenderid');
+                // console.log(value);
+
+                $.ajax({
+                                url: "/ajax_information_tender",
+                                type: "GET",
+                                dataType: "json",
+                                data: {
+                                    "tenderID": value
+                                },
+                                async: false,
+                                success: function (data) {
+                                    console.log(data['data2']);
+                                    $(".modal-body").text(data['data']);
+
+                                },
+                                fail: function (data) {
+                                    console.log("r" + data)
+                                }
+                            });
             });
 
         });
