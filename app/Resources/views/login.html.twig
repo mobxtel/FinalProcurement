@@ -1,43 +1,47 @@
-<div class=" container-fluid" >
-<section class="login-block">
-    <div class="container loginFormContainer">
-        <div class="row  align-items-center loginForm">
-            <div class=" col-md-offset-1 col-md-5  login-sec">
-                <h2 class="text-center">Hyr në sistem</h2>
-                {{form_start(form)}}
-                <div class="login-form">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-uppercase">Username</label>
-                        {{form_widget(form.username,{'attr': {'class': 'input--style-4'}})}}
-                      
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                        {{form_widget(form.password,{'attr': {'class': 'input--style-4'}})}}
-                    </div>
 
+{{ include ('styleandjs.html.twig') }}
+<div id="wrapper">
+    <div class="vertical-align-wrap">
+        <div class="vertical-align-middle">
+            <div class="auth-box ">
+                <div class="left">
+                    <div class="content">
+                        <div class="header">
+                            <div class="logo text-center"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"></div>
+                            <p class="lead">Login to your account</p>
+                        </div>
+                        <form class="form-auth-small" action="index.php">
+                            <div class="form-group">
+                                <label for="signin-email" class="control-label sr-only">Email</label>
+                                {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT'}})}}
+                            </div>
+                            <div class="form-group">
+                                <label for="signin-password" class="control-label sr-only">Password</label>
+                                {{form_widget(form.password,{'attr': {'class': 'form-control','placeholder':'password'}})}}
 
-                    <div class="">
-                        {{ form_row(form.submit,{'attr': {'class': 'btn btn--radius-2 btn--black',
-                            'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
-                    </div>
-                    <div  class="d-flex justify-content-center">
-                    <a href="{{ path('regjistohu') }}" style="color:#FFC107">Regjistrohu ne Sistem</a>
+                            </div>
+                            {{ form_row(form.submit,{'attr': {'class': 'btn btn-primary btn-lg btn-block',
+                                'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
+
+                            <div class="bottom">
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
+                            </div>
+                            <div  class="d-flex justify-content-center">
+
+                                <a href="{{ path('regjistohu') }}" style="color:#FFC107">Regjistrohu ne Sistem</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-            </div>
-            {{form_end(form)}}
-            <div class="col-md-6 align-items-center banner-sec">
-                <div>
-
-                    <img src="{{ asset('images/loginGirl.png') }}">
-
+                <div class="right">
+                    <div class="overlay"></div>
+                    <div class="content text">
+                        <h1 class="heading">Free Bootstrap dashboard template</h1>
+                        <p>by The Develovers</p>
+                    </div>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
-
-</section>
+    </div>
 </div>
-
-{{ include('styleandjs.html.twig') }}

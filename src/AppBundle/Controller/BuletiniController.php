@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Form\UserRegisterType;
+use AppBundle\Form\LoginAdminType;
 
 class BuletiniController extends controller
 {
@@ -23,7 +25,7 @@ class BuletiniController extends controller
       if (( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 ))
       {
           $logopath=$this->get('session')->get('logoPath');
-           $logopath="'uploads/logo/".$logopath."'";
+           $logopath="/uploads/logo/".$logopath;
 
 
 
@@ -69,6 +71,7 @@ class BuletiniController extends controller
 
 
     }
+
 
 
 }

@@ -31,7 +31,7 @@ class BiznesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()){
-        
+
            $logo = $form->get('logo')->getData();
 
            $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);

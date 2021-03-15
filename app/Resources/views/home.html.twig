@@ -8,11 +8,21 @@
 
 </head>
 <body>
-
-
+<div id="wrapper">
 {{ include ('nav.html.twig') }}
+<div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <h3 class="page-title">Buletini</h3>
+            {% block bodymain %}{% endblock %}
+        </div>
+    </div>
+</div>
 
-{% block bodymain %}{% endblock %}
+
+
+
 
 
 </body>

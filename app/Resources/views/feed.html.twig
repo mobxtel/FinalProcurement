@@ -2,45 +2,82 @@
 
 {% block bodymain %}
 
-
-    <div class="row col-12 ">
-   {% for tender in tenderat %}
-        <div class="row col-4 ">
-    <div class="card" style="width: 22rem; margin-bottom: 15px">
-        <div class="card-body">
-            <h4>Id: {{ tender.id }}</h4>
-            <h5 class="card-title"><b>Titull Thirrje: </b>{{ tender.titull_thirrje }}</h5>
-
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tendera</h3>
+        </div>
+        <div class="panel-body">
             <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titull Thirrje</th>
+                    <th>Biznesi</th>
+                    <th>Fond Limit</th>
+                    <th>Mbyllje Ofertimi</th>
+                    <th>Fusha e Operimit</th>
+                    <th> Detaje</th>
+                    <th></th>
+                </tr>
+                </thead>
                 <tbody>
+                {% for tender in tenderat %}
                 <tr>
-                    <td><b>Kompania</b></td>
+                    <td>{{ tender.id }}</td>
+                    <td>{{ tender.titull_thirrje }}</td>
                     <td><a>{{ tender.emer_biznesi}} </a></td>
-
-                </tr>
-                <tr>
-                    <td><b>Vlera e ofertes</b></td>
                     <td>{{ tender.fond_limit }}</td>
-
-                </tr>
-                <tr>
-
-                    <td><b>Mbyllje ofertimi</b></td>
                     <td>{{ tender.data_perfundimit|date('d-m-Y')  }}</td>
-
-                </tr>
-                <tr>
-
-                    <td><b>Fusha e Operimit</b></td>
                     <td>{{ tender.emer_fushe_operimi }}</td>
-
+                    <td>
+                        <a href="{{ path('tender_shiko',{'id':tender.id}) }}" ><span class="icon "><i class="fa fa-info-circle">Detaje</i></span></a>
+                    <a href="{{ path('oferto',{'id':tender.id }) }}">
+                        <span class="icon "><i class="lnr lnr-select">Apliko</i></span></a>
+                    </td>
                 </tr>
+               {% endfor %}
                 </tbody>
             </table>
-              <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"
-                        aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>
-            <a href="{{ path('oferto',{'id':tender.id }) }}">
-                <button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>
+        </div>
+    </div>
+
+{#   {% for tender in tenderat %}#}
+{#        <div class="row col-4 ">#}
+{#    <div class="card" style="width: 22rem; margin-bottom: 15px">#}
+{#        <div class="card-body">#}
+{#            <h4>Id: {{ tender.id }}</h4>#}
+{#            <h5 class="card-title"><b>Titull Thirrje: </b>{{ tender.titull_thirrje }}</h5>#}
+
+{#            <table class="table">#}
+{#                <tbody>#}
+{#                <tr>#}
+{#                    <td><b>Kompania</b></td>#}
+{#                    <td><a>{{ tender.emer_biznesi}} </a></td>#}
+
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td><b>Vlera e ofertes</b></td>#}
+{#                    <td>{{ tender.fond_limit }}</td>#}
+
+{#                </tr>#}
+{#                <tr>#}
+
+{#                    <td><b>Mbyllje ofertimi</b></td>#}
+{#                    <td>{{ tender.data_perfundimit|date('d-m-Y')  }}</td>#}
+
+{#                </tr>#}
+{#                <tr>#}
+
+{#                    <td><b>Fusha e Operimit</b></td>#}
+{#                    <td>{{ tender.emer_fushe_operimi }}</td>#}
+
+{#                </tr>#}
+{#                </tbody>#}
+{#            </table>#}
+{#              <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"#}
+{#                        aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>#}
+{#            <a href="{{ path('oferto',{'id':tender.id }) }}">#}
+{#                <button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>#}
 
 {#            <div class="col">#}
 {#                <div class="collapse multi-collapse" id="multiCollapseExample2">#}
@@ -52,12 +89,12 @@
 
 {#            <a   class="card-link">View Details</a>#}
 {#            <a href="#" class="card-link">Another link</a>#}
-        </div>
-    </div>
-        </div>
+{#        </div>#}
+{#    </div>#}
+{#        </div>#}
 
-{% endfor %}
-    </div>
+{#{% endfor %}#}
+
 {% endblock %}
 
 {#{%  block javascripts %}#}

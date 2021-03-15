@@ -1,0 +1,152 @@
+{% extends 'home.html.twig' %}
+
+{% block bodymain %}
+
+    <div class="col-lg-12 col-md-12">
+        <ul class="list-inline">
+            <li>
+         <span style="color: #34495e !important">
+         <b>Autoriteti Kontraktues: </b><br>
+         <span style="color: #607D8B">Bashkia Tepelene</span>
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Data e hapjes: </b><br>
+         <span style="color: #607D8B">16-03-2021</span>
+         <b> Ora :</b>
+         <small style="color: #607D8B">09:00</small>
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Data e mbylljes: </b><br>
+         <span style="color: #607D8B">17-03-2021</span>
+
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Numri i referencës: </b><br>
+         <span style="color: #607D8B">REF-89976-03-15-2021</span>
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Me lote: </b><br>
+         <span>
+         <i>Jo</i>
+         </span>
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Anulluar: </b><br>
+         <span>
+         <i>Jo</i>
+         </span>
+         </span>
+            </li>
+            <li class="line">
+                <span>|</span>
+            </li>
+            <li>
+         <span style="color: #34495e !important">
+         <b>Pezulluar: </b><br>
+         <span>
+         <i>Jo</i>
+         </span>
+         </span>
+            </li>
+        </ul>
+    </div>
+    <div class="row col-12 ">
+
+   {% for tender in tenderat %}
+        <div class="row col-12 ">
+    <div class="card" style="width: 22rem; margin-bottom: 15px">
+        <div class="card-body">
+            <h4>Id: {{ tender.id }}</h4>
+            <h5 class="card-title"><b>Titull Thirrje: </b>{{ tender.titull_thirrje }}</h5>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td><b>Kompania</b></td>
+                    <td><a>{{ tender.emer_biznesi}} </a></td>
+
+{#                </tr>#}
+{#                <tr>#}
+                    <td><b>Vlera e ofertes</b></td>
+                    <td>{{ tender.fond_limit }}</td>
+
+{#                </tr>#}
+{#                <tr>#}
+
+                    <td><b>Mbyllje ofertimi</b></td>
+                    <td>{{ tender.data_perfundimit|date('d-m-Y')  }}</td>
+
+{#                </tr>#}
+{#                <tr>#}
+
+                    <td><b>Fusha e Operimit</b></td>
+                    <td>{{ tender.emer_fushe_operimi }}</td>
+
+                </tr>
+                </tbody>
+            </table>
+              <a href="{{ path('tender_shiko',{'id':tender.id}) }}" > <button class="btn btn-primary" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="multiCollapseExample1" >Me shume informacion</button></a>
+            <a href="{{ path('oferto',{'id':tender.id }) }}">
+                <button id="sidebarCollapse" class="btn btn-primary" >Apliko</button></a>
+
+{#            <div class="col">#}
+{#                <div class="collapse multi-collapse" id="multiCollapseExample2">#}
+{#                    <div class="card card-body">#}
+{#                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+{#            <a   class="card-link">View Details</a>#}
+{#            <a href="#" class="card-link">Another link</a>#}
+        </div>
+    </div>
+        </div>
+
+{% endfor %}
+    </div>
+
+{% endblock %}
+
+{#{%  block javascripts %}#}
+{#{{ parent() }}#}
+
+{#    <script>#}
+{#        $(document).ready(function (){#}
+{#            $('#sidebarCollapse').on('click', function () {#}
+{#            $('#sidebar').toggleClass('active');#}
+{#        });#}
+
+{#        $('.collapse').collapse()#}
+{#        $('#myCollapsible').collapse({#}
+{#            toggle: false#}
+{#        });#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
