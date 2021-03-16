@@ -1,5 +1,11 @@
 {% extends 'home.html.twig' %}
-{% block bodymain %} {% for oferta in oferta %}
+{% block header %}
+    <h3 class="page-title"> Oferta e Detajuar
+    </h3>
+{% endblock %}
+{% block bodymain %}
+<div class="panel modifiko  detaje">
+    {% for oferta in oferta %}
     <table class="table">
     <tbody>
     <tr>
@@ -27,7 +33,10 @@
             </tr>
         {% endfor %}
 
-    </tbody> {% endfor %} </table>
+    </tbody> {% endfor %}
+    </table>
+</div>
 {% endblock %}
+
 {% block javascripts %}
 {% endblock %}

@@ -28,8 +28,8 @@ class OfertaController extends  Controller
         if( ($this->get('session')->get('loginUserId') != null )
 //            && ($this->get('session')->get('roleId') != 4)
              ){
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+           $logopath=$this->get('session')->get('logoPath');
+            $logopath="/uploads/logo/".$logopath;
             $user = $this->get('session')->get('loginUserId');
 
             $Query="SELECT emer_biznesi 
@@ -95,8 +95,8 @@ class OfertaController extends  Controller
     public function shikoOfertateMia(Request $request,EntityManagerInterface  $entityManager)
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+           $logopath=$this->get('session')->get('logoPath');
+            $logopath="/uploads/logo/".$logopath;
 
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
@@ -150,8 +150,8 @@ class OfertaController extends  Controller
     public function shikoOferten(Request $request,EntityManagerInterface  $entityManager, Oferta $oferta)
     {
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4)){
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+           $logopath=$this->get('session')->get('logoPath');
+            $logopath="/uploads/logo/".$logopath;
 
             $biznesId = $this->get('session')->get('loginUserId');
             $repository = $entityManager->getRepository(Oferta::class);
@@ -207,8 +207,8 @@ class OfertaController extends  Controller
 
         if(($this->get('session')->get('loginUserId') != null) && ($this->get('session')->get('roleId') !=4))
         {
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+           $logopath=$this->get('session')->get('logoPath');
+            $logopath="/uploads/logo/".$logopath;
             $Query="SELECT emer_biznesi 
                     From biznes
                     Where biznes.id=:biznesID ";

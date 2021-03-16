@@ -1,5 +1,9 @@
 {% extends 'home.html.twig' %}
+{% block header %}
+<h3>Ofertat e mia</h3>
+{% endblock %}
 {% block bodymain %}
+    <div class="panel modifiko ">
     <table class="table">
     <thead>
     <tr>
@@ -44,5 +48,7 @@
             <td colspan="15">no records found</td>
         </tr>
     {% endfor %}
-
+    </tbody>
+    </table>
+    </div>
 {% endblock %}

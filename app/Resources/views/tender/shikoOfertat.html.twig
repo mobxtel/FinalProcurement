@@ -1,6 +1,11 @@
 {% extends 'home.html.twig' %}
+{% block header %}
+    <h3 class="page-title"> Ofertat e mia</h3>
+{% endblock %}
 {% block bodymain %}
-<h2> Tenderi:</h2>
+    <h2> Tenderi:</h2>
+<div class="panel modifiko">
+
 <table class="table">
     <tbody>
     <tr>
@@ -33,7 +38,9 @@
 
     </tbody>
 </table>
+</div>
 <h2>Ofertat</h2>
+        <div class="panel modifiko">
 <table class="table">
     <thead>
     <tr>
@@ -65,5 +72,7 @@
         <td colspan="15">no records found</td>
     </tr>
 {% endfor %}
-
+    </tbody>
+</table>
+        </div>
     {% endblock %}

@@ -102,6 +102,12 @@ class Biznes
      * @ORM\Column(name="fushe_operimi_id", type="integer", nullable=false)
      */
     private $fusheOperimiId;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bashkia", type="string", length=255, nullable=false)
+     */
+    private $bashkia;
 
     /**
      * @var integer
@@ -334,6 +340,22 @@ class Biznes
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBashkia()
+    {
+        return $this->bashkia;
+    }
+
+    /**
+     * @param string $bashkia
+     */
+    public function setBashkia($bashkia)
+    {
+        $this->bashkia = $bashkia;
     }
 
 

@@ -51,6 +51,7 @@ class BiznesController extends Controller
            $biznes->setIsDeleted(0);
            $biznes->setPaguar(1);
            $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
+           $biznes->setBashkia($form->get('bashkia')->getData());
 
            if ($this->get('session')->get('loginUserId') != null){
                $biznes->setCreatedBy($this->get('session')->get('loginUserId'));
@@ -92,8 +93,9 @@ class BiznesController extends Controller
 
             $biznesId=$this->get('session')->get('loginUserId');
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
             $logo=  $this->get('session')->get('logoPath');
+
 
             $Query="SELECT emer_biznesi , 
                     email as email, 
@@ -131,7 +133,7 @@ class BiznesController extends Controller
 
             $biznesId=$this->get('session')->get('loginUserId');
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
             $logo=  $this->get('session')->get('logoPath');
 
             $Query="SELECT emer_biznesi 

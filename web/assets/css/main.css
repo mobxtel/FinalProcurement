@@ -1090,7 +1090,29 @@ ul.activity-list > li {
       position: inherit;
       padding: 30px; }
     .auth-box .right {
-      display: none; } }
+      display: none; }
+    .auth-box .registerLeft {
+      float: left;
+       width: 100% !important;
+      height: 100%;
+      /* padding: 0 30px; */
+      text-align: center;
+    }
+
+    .auth-box .registerRight{
+      display: none !important;
+    }
+
+  }
+@media screen and (max-width: 1023px) {
+  .auth-box .registerLeft {
+    float: left;
+    width: 100% !important;
+    height: 100%;
+    /* padding: 0 30px; */
+    text-align: center;
+  }
+}
   @media screen and (max-width: 992px) {
     .auth-box {
       width: 70%; }
@@ -1762,4 +1784,72 @@ ul.activity-timeline > li {
     width: 22px;
     border: 1px solid #CCC; }
 
+.auth-box .registerRight {
+  float: left !important;
+  width: 45%;
+  height: 100%;
+  position: relative;
+  background-image: url(../../assets/img/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.auth-box .registerLeft {
+  float: left;
+  width: 55% !important;
+  height: 100%;
+  /* padding: 0 30px; */
+  text-align: center;
+  overflow-y:auto;
+}
+.registerLeft label{
+  flow:left;
+}
+
+.profile .table>tbody>tr>td,
+ .table>tbody>tr>th,
+ .table>tfoot>tr>td,
+ .table>tfoot>tr>th,
+ .table>thead>tr>td,
+ .table>thead>tr>th {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top:none !important; ;
+  border-bottom: none;
+}
+@media screen and (max-width: 640px){
+  .navbar-default #navbar-menu {
+    float: none !important;
+    display: block;
+  }
+}
+@media screen and (max-width: 992px) {
+  .navbar-default .brand {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-nav > li > a {
+     padding-top: 20px ;
+  }
+}
+@media screen and (max-width: 767px){
+  .navbar-nav > li > a span:not(.badge), .navbar-nav > li > a .icon-submenu {
+     display: block !important;
+  }
+}
+.profile .panel .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+  border-top: none !important;
+}
+.modifiko{
+  padding:28px;
+}
+.detaje{
+  padding-right: 20%;
+  padding-left: 20%;
+}
+.panel-body .titull h3, h4{
+  color:#f4a950;
+}
 /*# sourceMappingURL=main.css.map */

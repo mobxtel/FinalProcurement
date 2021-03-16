@@ -1,13 +1,14 @@
 {% extends 'home.html.twig' %}
-{% block title %}View Tabela{% endblock %}
+{% block header %}<h3 class="page-title">Tenderat e mi</h3>{% endblock %}
 {% block bodymain %}
     {% for message in app.flashes('success') %}
         <div class="flash-notice">
             {{ message }}
         </div>
     {% endfor %}
-
     <a href="{{ path('tender_krijo') }}"> <button  type="button" class="btn btn-warning">KRIJO TENDER TE RI</button></a>
+
+    <div class="panel modifiko ">
     <h3>Tenderat Draft</h3>
     <table class="table">
         <thead>
@@ -38,7 +39,8 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
+    <div class="panel modifiko">
  <h3> Tenderat Aktiv</h3>
     
     <table class="table">
@@ -78,7 +80,8 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
+<div class="panel modifiko">
     <h3>Tenderat Inaktiv</h3>
     <table class="table">
         <thead>
@@ -117,6 +120,7 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 {#    <a href="{{ path('tender_new') }}">Create new</a>#}
 {% endblock %}
 

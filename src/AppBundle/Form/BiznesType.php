@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\FushaOperimi;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -51,22 +52,22 @@ class BiznesType extends AbstractType
             ->add('fushe_operimi_id',EntityType::class,[
                 'class'=> FushaOperimi::class,
                 'choice_label' => 'emer fushe operimi',
-                'choice_value'=>'id'
+                'choice_value'=>'id',
+//                'multiple'=>true
 
 
             ])
-//                ->add('fushe_operimi_id',EntityType::class,[
-//                    'class'=> FushaOperimi::class,
-//                    'choice_label' => 'emer fushe operimi',
-//                    'choice_value'=>'id',
-//                    'multiple' => true
+//                ->add('bashkia',ChoiceType::class,[
+//                    'choices' => [
+//                      'Belsh'=>'Belsh',
+//                       'Berat'=>'Berat'   ]
 //
 //                ])
             ->add('numerTelefoni',NumberType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
+                'options' => ['attr' => ['class' => 'password-field form-groupphp']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],

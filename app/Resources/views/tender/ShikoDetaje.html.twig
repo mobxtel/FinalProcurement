@@ -1,7 +1,10 @@
 {% extends 'home.html.twig' %}
-{% block bodymain %}
-    <h1>Detaje Tenderi</h1>
+{% block header %}
+    <h3 class="page-title">  Detaje Tenderi</h3>
+{% endblock %}
 
+{% block bodymain %}
+<div class=" panel modifiko detaje d-flex justify-content-center">
     <table class="table">
         <tbody>
 
@@ -53,4 +56,7 @@
     {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('oferto',{'id':tender.id }) }}" style="float:right">
+      <button class="btn btn-warning">  <span class="icon "><i class="lnr lnr-select">Apliko</i></span></button></a>
+</div>
 {% endblock %}

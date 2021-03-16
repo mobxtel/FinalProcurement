@@ -28,7 +28,7 @@ class TenderController extends Controller
 
             $biznesId = $this->get('session')->get('loginUserId');
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
 
             $statusDraft = "draft";
             $today = new \DateTime();
@@ -143,7 +143,7 @@ class TenderController extends Controller
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
 
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
             $entityManager=  $this->getDoctrine()->getManager();
             $Query="SELECT emer_biznesi 
                 From biznes
@@ -234,7 +234,7 @@ class TenderController extends Controller
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
 
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
 
             $dokumenta = new Dokumenta();
             $repository = $entityManager->getRepository(FushaOperimi::class);
@@ -285,7 +285,7 @@ class TenderController extends Controller
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
 
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
 
             $form = $this->createForm(TenderType::class, $tender);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
@@ -366,7 +366,7 @@ class TenderController extends Controller
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
 
 //        Beje Aktive
             $tender->setDataFillimit(new \DateTime());
@@ -393,7 +393,7 @@ class TenderController extends Controller
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
             $Query="SELECT emer_biznesi 
             From biznes
                     Where biznes.id=:biznesID ";
@@ -472,7 +472,7 @@ class TenderController extends Controller
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
 
             $logopath=$this->get('session')->get('logoPath');
-            $logopath="'/uploads/logo/".$logopath."'";
+            $logopath="/uploads/logo/".$logopath;
             $ofertatQuery="SELECT oferta.id as 'OfertaId',
                      oferta.pershkrimi as 'OfertaPershkrim', 
                      oferta.vlefta, 

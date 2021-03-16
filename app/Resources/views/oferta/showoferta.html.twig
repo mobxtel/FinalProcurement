@@ -1,6 +1,9 @@
 {% extends 'home.html.twig' %}
+
+{% block header %}<h3 class="page-title">Modifikim Oferte</h3>{% endblock %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
         {% block bodymain %}
+            <div class="panel modifiko  ">
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
@@ -14,6 +17,7 @@
                     <button  class=" deleteBtn btn btn--danger btn-dark" id="{{ dokument.id }}" >Delete</button>
                 </div>
             {% endfor %}
+            </div>
 
             {% block javascripts %}
                 <script src="{{ asset('js/jquery.js') }}"></script>

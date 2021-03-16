@@ -7,10 +7,10 @@
                 <div class="left">
                     <div class="content">
                         <div class="header">
-                            <div class="logo text-center"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"></div>
-                            <p class="lead">Login to your account</p>
+                            <div class="logo text-center"><img src="assets/img/Logo.png" alt="Logo" width="120px"></div>
+                            <p class="lead">Identifikohuni në sistem</p>
                         </div>
-                        <form class="form-auth-small" action="index.php">
+                        {{ form_start(form) }}
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">Email</label>
                                 {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT'}})}}
@@ -22,7 +22,7 @@
                             </div>
                             {{ form_row(form.submit,{'attr': {'class': 'btn btn-primary btn-lg btn-block',
                                 'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
-
+                        {{ form_end(form) }}
                             <div class="bottom">
                                 <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
                             </div>
@@ -30,7 +30,7 @@
 
                                 <a href="{{ path('regjistohu') }}" style="color:#FFC107">Regjistrohu ne Sistem</a>
                             </div>
-                        </form>
+
                     </div>
                 </div>
                 <div class="right">
