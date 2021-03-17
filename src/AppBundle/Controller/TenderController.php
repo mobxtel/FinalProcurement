@@ -3,13 +3,13 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Entity\Dokumenta;
 use AppBundle\Entity\FushaOperimi;
 use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Tender;
-use AppBundle\Forms\TenderAktivType;
-use AppBundle\Forms\TenderType;
+use AppBundle\Form\TenderAktivType;
+
+use AppBundle\Form\TenderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -404,7 +404,7 @@ class TenderController extends Controller
             $biznesName= $profili[0]["emer_biznesi"];
 
 
-            $form = $this->createForm(TenderAktivType::class);
+            $form = $this->createForm(  TenderAktivType::class);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $tender->setDataPerfundimit($form->get('dataPerfundimit')->getData());

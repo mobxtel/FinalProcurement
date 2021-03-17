@@ -18,23 +18,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3dca02fb-3972-42ad-a366-bba977f0c15a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/feed.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/feed.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/feed_test.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/feed_test.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/home.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/oferta/ofertatemia.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/oferta/ofertatemia.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profili.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/profili.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profili_modifikim.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/profili_modifikim.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/regjistrim.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/regjistrim.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/signup.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/signup.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/krijoTender.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/krijoTender.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/tenderatemi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/tenderatemi.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/OfertaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/OfertaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TestControllerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TestControllerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TenderController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
