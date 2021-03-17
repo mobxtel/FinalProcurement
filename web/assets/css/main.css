@@ -1916,7 +1916,18 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
-
-
+.imageRegister {
+  float: left;
+  width: 100%;
+  height: auto;
+  position: relative;
+  background-image: url(../../assets/img/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*#Register*/
+/*{*/
+/*  max-height: 100vw;*/
+/*}*/
+/*{max-width: 100vw; height: 95vh;}*/
 /*# sourceMappingURL=main.css.map */
