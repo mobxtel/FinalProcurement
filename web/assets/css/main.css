@@ -1929,7 +1929,14 @@ table {
   .imageRegister{
   /*  display: none;*/
   /*}*/
-  height:20vh;}
+  height:20vh;
+  }
+  .registerForm {
+    padding-bottom: 30px !important;
+  }
+  .header{
+    float:none !important;
+  }
 }
 #viewFull
 {

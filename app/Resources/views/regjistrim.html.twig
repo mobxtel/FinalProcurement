@@ -275,8 +275,8 @@
     <div class="container-fluid  " id="viewFull">
         <div class="row" >
             <div class="col-lg-10 col-lg-offset-1">
-                <!-- BUTTONS -->
-                <div class="panel  " style="padding: 0px !important;">
+
+                <div class="panel  " style="padding: 0px !important; ">
                     <div class="panel-body"  id="Register">
                         <div class="col-lg-4  col-md-4 ">
                             <div class="  imageRegister p-3 ">
@@ -287,8 +287,8 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-8 " style="padding-right:40px;padding-left:40px">
-                            <div class="content py-5  ">
-                                <div class="row">
+                            <div class="content py-5  registerForm ">
+                                <div class="row "  style="padding-top:10px !important;">
                                     <div  class="RegisterHeading">
                                         <h3  >Rregjistrohu
                                         </h3>
@@ -299,11 +299,11 @@
                                     </div>
                                     <div class="header"  style="float:right">
                                         <div class="logo text-center">
-                                            <img src="assets/img/Logo.png"  alt=" Logo" width="100px">
+                                            <img src="assets/img/Logo.png"  alt=" Logo" width="120px">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row registerForm ">
                                     {{ form_start(form) }}
                                     <div class="form-group col-md-6">
                                         {{ form_row(form.emer_biznesi,{'attr': {'class': 'form-control'}}) }}
@@ -343,7 +343,7 @@
                                         {{ form_row(form.password,{'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-                                {{ form_row(form.submit,{'attr': {'class': 'btn btn-primary btn-lg btn-block',
+                                {{ form_row(form.submit,{'attr': {'class': ' registerBtn btn btn-primary btn-lg btn-block',
                                     'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
                                 {{ form_end(form) }}
                             </div>
