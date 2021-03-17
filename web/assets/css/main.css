@@ -1919,15 +1919,28 @@ table {
 .imageRegister {
   float: left;
   width: 100%;
-  height: auto;
+  height: 95vh;
   position: relative;
   background-image: url(../../assets/img/login-bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
-/*#Register*/
-/*{*/
-/*  max-height: 100vw;*/
-/*}*/
+@media screen and (max-width: 1022px) {
+  .imageRegister{
+  /*  display: none;*/
+  /*}*/
+  height:20vh;}
+}
+#viewFull
+{
+
+  max-height: 70vh !important;
+}
+#Register{
+  padding:0px !important;
+}
+.panel-body .col-lg-4{
+  padding:0px;
+}
 /*{max-width: 100vw; height: 95vh;}*/
 /*# sourceMappingURL=main.css.map */
