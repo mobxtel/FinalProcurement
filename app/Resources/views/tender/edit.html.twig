@@ -1,5 +1,5 @@
 {% block bodymain %}
-
-{{ include('tender/krijoTender.html.twig', {'button_label': 'Update'}) }}
+    {% block header %} Modifiko Tender Draft {% endblock %}
+{{ include('tender/krijoTender.html.twig', {'button_label': 'Update'},{'header':'Modifiko Tender Draft'}) }}
 
 {% endblock%}

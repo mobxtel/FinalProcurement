@@ -100,7 +100,7 @@ class TestControllerController extends Controller
 
 
 
-        return $this->render('signup.html.twig',[
+        return $this->render('login.html.twig',[
             'form' => $form->createView(),
             'form_login'=>$form_login->createView()
         ]);

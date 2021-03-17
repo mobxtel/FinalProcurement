@@ -1,6 +1,7 @@
 {% extends 'home.html.twig' %}
 {% block header %}<h3 class="page-title">Tenderat e mi</h3>{% endblock %}
 {% block bodymain %}
+
     {% for message in app.flashes('success') %}
         <div class="flash-notice">
             {{ message }}
@@ -10,7 +11,7 @@
 
     <div class="panel modifiko ">
     <h3>Tenderat Draft</h3>
-    <table class="table">
+    <table class="table  table-condensed bse-col-collapse-add">
         <thead>
         <tr>
             <th>TitullThirrje</th>
@@ -27,10 +28,23 @@
 
                 <td>{{ tender.titullThirrje }}</td>
                 <td>{{ tender.fondLimit }}</td>
-                <td><a href="{{ path('tender_edit', {'id': tender.id}) }}"><button type="button" class="btn btn-outline-info">Modifiko</button></a></td>
-                <td><a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}"> <button type="button" class="btn btn-success">Publiko</button></a></td>
-                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}"><button type="button" class="btn btn-info">Shiko Detaje</button></a></td>
-                <td><a href="{{path('tender_fshi', {'id': tender.id}) }}"><button type="button" class="btn  btn-danger">Fshi</button></a></td>
+                <td><a href="{{ path('tender_edit', {'id': tender.id}) }}">
+
+                        <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+
+
+                </td>
+                <td><a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
+                        <button type="button" class="btn btn-success"><i class="lnr lnr-location"></i></button></a>
+
+                </td>
+                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+
+                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i></button></a>
+                </td>
+                <td><a href="{{path('tender_fshi', {'id': tender.id}) }}">
+                        <button type="button" class="btn  btn-danger"><i class="lnr lnr-trash"></i></button></a>
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -43,7 +57,7 @@
     <div class="panel modifiko">
  <h3> Tenderat Aktiv</h3>
     
-    <table class="table">
+    <table class="table table-condensed bse-col-collapse-add">
         <thead>
         <tr>
             <th>Id</th>
@@ -51,11 +65,15 @@
             <th>FondLimit</th>
             <th>DataPerfundimit</th>
             <th>EmerStatusi</th>
-            <th>Nr Ofertuesish</th>
+            <th>Ofertat</th>
+            <th>Modifiko</th>
+            <th>Shiko</th>
+            <th>Fshi</th>
+            <th>Mbyll</th>
 
             {#           <th>BiznesIdId</th>#}
             {#            <th>TenderId</th>#}
-            <th>actions</th>
+
         </tr>
         </thead>
         <tbody>
@@ -66,11 +84,24 @@
                 <td>{{ tender.fondLimit }}</td>
                 <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tender.emerStatusi }}</td>
-                <td><button type="button" class="btn btn-outline-dark"> <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">Shiko {{ tender.nrAplikimesh }} Ofertat </a></button></td>
-                <td><a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}"><button type="button" class="btn btn-outline-info">Modifiko</button></a></td>
-                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}"><button type="button" class="btn btn-info">Shiko Detaje</button></a></td>
-                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}"><button type="button" class="btn-outline-danger"> Fshi</button></a></td>
-                <td><a href="{{ path('tender_mbyll', {'id': tender.id}) }}"><button>Mbyll</button></a></td>
+                <td><button type="button" class="btn btn-outline-dark">
+                        <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                             {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button></td>
+                <td><a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
+
+                        <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+
+
+                </td>
+                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button></a>
+                </td>
+                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i> </button></a>
+                </td>
+                <td><a href="{{ path('tender_mbyll', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-warning"><i class="lnr lnr-cross"></i></button></a>
+                </td>
                 <td></td>
             </tr>
         {% else %}
@@ -83,7 +114,7 @@
     </div>
 <div class="panel modifiko">
     <h3>Tenderat Inaktiv</h3>
-    <table class="table">
+    <table class="table table-condensed bse-col-collapse-add">
         <thead>
         <tr>
             <th>Id</th>
@@ -91,8 +122,10 @@
              <th>FondLimit</th>
              <th>DataPerfundimit</th>
              <th>EmerStatusi</th>
-             <th>Nr Aplikimesh</th>
-            <th>actions</th>
+             <th>Ofertat</th>
+            <th>Shiko</th>
+            <th>Fshi</th>
+
         </tr>
         </thead>
         <tbody>
@@ -103,9 +136,19 @@
                 <td>{{ tender.fondLimit }}</td>
                 <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tender.emerStatusi }}</td>
-                <td><button type="button" class="btn btn-outline-dark"> <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">Shiko {{ tender.nrAplikimesh }} Ofertat </a></button></td>
-                <td> <a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko</a></td>
-                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">Fshi</a></td>
+                <td>
+                    <button type="button" class="btn btn-outline-dark">
+                        <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                            {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button>
+                </td>
+                <td>
+                    <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button></a>
+                </td>
+                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i></button>
+                    </a>
+                </td>
                 {#                <td>{{ tender.biznesIdId }}</td>#}
                 {#                <td>{{ tender.tenderId }}</td>#}
                 <td>

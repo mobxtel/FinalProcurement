@@ -8072,5 +8072,31 @@ button.close {
         float: none !important;
     }
 }
+@media screen and (max-width: 1023px) {
+    .auth-box .left {
+        width: 100%;
+        position: inherit;
+        padding: 30px; }
+    .auth-box .right {
+        display: none; }
+    .auth-box .registerLeft {
+        float: left;
+        width: 100% !important;
+        height: 100%;
+        /* padding: 0 30px; */
+        text-align: center;
+    }
 
+    .auth-box .registerRight{
+        display: none !important;
+    }
+    .auth-box .registerRight {
+
+        width: 100% !important;
+        height: 100%;
+        position: relative;
+
+    }
+
+}
 /*# sourceMappingURL=bootstrap.min.css.map */

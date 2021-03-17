@@ -19,27 +19,19 @@
     <list default="true" id="3dca02fb-3972-42ad-a366-bba977f0c15a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/feed.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/feed.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/feed_test.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/feed_test.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/home.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/nav.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/nav.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/oferta/aplikim.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/oferta/aplikim.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/oferta/ofertadetajuar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/oferta/ofertadetajuar.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/oferta/ofertatemia.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/oferta/ofertatemia.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/oferta/showoferta.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/oferta/showoferta.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/profili.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/profili.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/profili_modifikim.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/profili_modifikim.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/regjistrim.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/regjistrim.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/ShikoDetaje.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/ShikoDetaje.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/modifikoaktiv.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/modifikoaktiv.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/shikoOfertat.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/shikoOfertat.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/signup.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/signup.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/krijoTender.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/krijoTender.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/tender/tenderatemi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/tender/tenderatemi.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/BiznesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/BiznesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/OfertaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/OfertaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TenderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Biznes.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Biznes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/BiznesType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/BiznesType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/UserRegisterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/UserRegisterType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TestControllerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TestControllerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
@@ -135,6 +127,7 @@
       <workItem from="1614167619734" duration="736000" />
       <workItem from="1615491805093" duration="18182000" />
       <workItem from="1615814456575" duration="2322000" />
+      <workItem from="1615925509157" duration="13542000" />
     </task>
     <servers />
   </component>
@@ -174,10 +167,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1615493149539" />
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1615841933251">
+    <state x="599" y="25" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1615935877200">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1615841933251" />
+    <state x="599" y="25" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1615935877200" />
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1615939016912">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1615939016912" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -186,11 +183,6 @@
           <url>file://$PROJECT_DIR$/src/AppBundle/Controller/BuletiniController.php</url>
           <line>5</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/Resources/views/signup.html.twig</url>
-          <line>20</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Resources/views/nav.html.twig</url>

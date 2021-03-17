@@ -1,12 +1,13 @@
 {% extends 'home.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block header %}
+<h3 class="page-title">Tender i ri</h3>
+{% endblock %}
 {% block bodymain %}
 
+<div class="panel modifiko">
 {{ form_start(form) }}
  {{ form_widget(form) }}
-
-
-
 
     <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
    {{ form_end(form) }}
@@ -20,11 +21,12 @@
             <button  class=" deleteBtn btn btn--danger btn-dark" id="{{ dokument.id }}" >Delete</button>
         </div>
     {% endfor %}
-
+</div>
 
 {% block javascripts %}
     <script src="{{ asset('js/jquery.js') }}"></script>
-    {{ parent() }} <script src="{{ asset('js/popper.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

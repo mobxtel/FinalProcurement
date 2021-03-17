@@ -5,24 +5,26 @@
     <div class="vertical-align-wrap">
         <div class="vertical-align-middle">
             <div class="auth-box container-fluid">
-                <div class="right registerRight ">
+                <div class=" right ">
                     <div class="overlay"></div>
                     <div class="content text">
 
                     </div>
                 </div>
-                <div class="left registerLeft  container-fluid">
+                <div class=" left ">
                     <div class="content py-5 ">
                        <div class="row">
-                           <div style="float:left">
+                           <div  class="RegisterHeading">
                         <h3  >Rregjistrohu</h3>
-                           <p class="lead">Nese keni llogari, identifikohuni!</p>
+                           <p class="lead">Nese keni llogari,<a href="{{ path('homepage') }}"> identifikohuni!</a></p>
+
+
                            </div>
-                        <div class="header"  style="float:right">
-                            <div class="logo text-center"><img src="assets/img/Logo.png"  alt=" Logo" width="100px"></div>
+                           <div class="header"  style="float:right">
+                               <div class="logo text-center"><img src="assets/img/Logo.png"  alt=" Logo" width="100px"></div>
 
 
-                        </div>
+                           </div>
                        </div>
                         <div class="row">
                         {{ form_start(form) }}
@@ -43,7 +45,7 @@
                                 {{ form_row(form.numerTelefoni,{'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
-
+<hr>
                         <div class="row">
                             <div class="form-group  col-md-6 ">
                                 {{ form_row(form.fushe_operimi_id,{'attr': {'class': 'form-control'}}) }}
@@ -59,6 +61,7 @@
                                 {{ form_row(form.adresa,{'attr': {'class': 'form-control'}})}}
                             </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="form-group  col-md-6 ">
                                 {{ form_row(form.logo,{'attr': {'class': 'form-control'}}) }}
@@ -77,7 +80,7 @@
 
 
                     </div>
-{#                </div>#}
+                </div>
 
                 <div class="clearfix"></div>
             </div>
@@ -85,5 +88,4 @@
     </div>
 
 </div>
-
 

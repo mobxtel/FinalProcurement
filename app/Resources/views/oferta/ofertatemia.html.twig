@@ -7,7 +7,8 @@
     <table class="table">
     <thead>
     <tr>
-        <th>Pershkrim i tenderit</th>
+        <th>#</th>
+        <th>Titulli i tenderit</th>
         <th>Vlera e Fondit Limit</th>
         <th>Data e mbylljes se Tenderit</th>
         <th>Statusi i Tenderit</th>
@@ -21,25 +22,44 @@
     <tbody>
     {% for oferta in oferta %}
         <tr>
-            <td>{{ oferta.ofertaId }}</td>
-            <td>{{ oferta.titullTender }}</td>
-            <td>{{ oferta.VleraOferte }}</td>
-            <td>{{ oferta.dataMbylljeTender }}</td>
-            <td>{{ oferta.statusTender }}</td>
-            <td>{{ oferta.vendimi }}</td>
-            <td>
+
+        <td>{{ oferta.ofertaId }}</td>
+        <td>{{ oferta.titullTender }}</td>
+         <td>{{ oferta.VleraOferte }}</td>
+         <td>{{ oferta.dataMbylljeTender }}</td>
+        <td>
+        {% if oferta.statusTender == 'aktiv'%}
+         <span class="label label-success">
+
+        {% elseif  oferta.statusTender == 'mbyllur'%}
+            <span class="label label-danger">
+        {% endif %}
+                {{ oferta.statusTender|upper }} </span>
+            </td>
+        <td>
+        {% if oferta.vendimi == 'fitues'%}
+        <span class="label label-success">
+
+        {% elseif  oferta.vendimi == 'shqyrtim'%}
+        <span class="label label-default">
+        {% endif %}
+        {{ oferta.vendimi|upper }}</span>
+         <td>
                 <a href="{{ path('Modifiko_Oferten', {'id': oferta.ofertaId}) }}">
-                    <button type="button" class="btn btn-outline-info">Modifiko</button>
+                    <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button>
                 </a>
             </td>
         <td>
             <a href="{{ path('detaje_oferte', {'id': oferta.ofertaId}) }}">
-            <button type="button" class="btn btn-info">Detaje</button></a>
+                <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button>
+            </a>
+
         </td>
             <td>
                 <a href="{{ path('fshiOferten', {'id': oferta.ofertaId})}}">
-                <button type="button" class="btn btn-danger">Fshi
-                </button></a>
+                <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i>
+                </button>
+                </a>
             </td>
 
 
@@ -50,5 +70,45 @@
     {% endfor %}
     </tbody>
     </table>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Demo</h4>
+                    </div>
+                    <div class="modal-body">
+                        Body modal
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="modal hide fade">
+            <button> close</button>
+            kdsjfsajkfdjkawejkewu
+            <!-- register form here -->
+        </div>
+
+
     </div>
+{% endblock %}
+
+
+{%  block javascripts %}
+{{ parent() }}
+
+    <script>
+        $(document).ready(function (){
+
+
+        $('.collapse').collapse()
+        $('#myCollapsible').collapse({
+            toggle: false
+        });
+        });
+    </script>
 {% endblock %}

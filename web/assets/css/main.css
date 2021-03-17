@@ -999,6 +999,31 @@ ul.activity-list > li {
     *display: inline;
     width: 99%;
     vertical-align: middle; }
+
+   .registerLeft{
+    float: left;
+    width: 56%;
+    height: 100%;
+    padding: 0 30px;
+    text-align: center;
+     margin-left:3%;
+     margin-top:3%;
+  }
+.RegisterHeading{
+  float :left;
+  text-align: left;
+
+}
+.auth-box .left:before {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  content: ' ';
+  vertical-align: middle;
+  height: 100%; }
+
   .auth-box .left {
     float: left;
     width: 42%;
@@ -1014,6 +1039,50 @@ ul.activity-list > li {
       content: ' ';
       vertical-align: middle;
       height: 100%; }
+
+.registerRight {
+  float: right;
+  width: 40%;
+  height: 100%;
+  position: relative;
+  background-image: url("../../assets/img/login-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+margin-left:-2%
+}
+
+.auth-box .registerRight:before {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  content: ' ';
+  vertical-align: middle;
+  height: 100%; }
+.auth-box .registerRight .text {
+  position: relative;
+  padding: 0 30px;
+  color: #fff; }
+.auth-box .registerRight .heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 26px;
+  font-weight: 300; }
+.auth-box .registerRight p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300; }
+.auth-box .registerRight .overlay {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 27, 33, 0.72); }
+
+
+
   .auth-box .right {
     float: right;
     width: 58%;
@@ -1091,28 +1160,28 @@ ul.activity-list > li {
       padding: 30px; }
     .auth-box .right {
       display: none; }
-    .auth-box .registerLeft {
+    .registerLeft {
       float: left;
        width: 100% !important;
       height: 100%;
       /* padding: 0 30px; */
       text-align: center;
+
     }
 
-    .auth-box .registerRight{
+    .registerRight{
       display: none !important;
     }
+    .registerRight {
+
+      width: 100% !important;
+      height: 100%;
+      position: relative;
+
+    }
 
   }
-@media screen and (max-width: 1023px) {
-  .auth-box .registerLeft {
-    float: left;
-    width: 100% !important;
-    height: 100%;
-    /* padding: 0 30px; */
-    text-align: center;
-  }
-}
+
   @media screen and (max-width: 992px) {
     .auth-box {
       width: 70%; }
@@ -1784,23 +1853,6 @@ ul.activity-timeline > li {
     width: 22px;
     border: 1px solid #CCC; }
 
-.auth-box .registerRight {
-  float: left !important;
-  width: 45%;
-  height: 100%;
-  position: relative;
-  background-image: url(../../assets/img/login-bg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.auth-box .registerLeft {
-  float: left;
-  width: 55% !important;
-  height: 100%;
-  /* padding: 0 30px; */
-  text-align: center;
-  overflow-y:auto;
-}
 .registerLeft label{
   flow:left;
 }
@@ -1852,4 +1904,19 @@ ul.activity-timeline > li {
 .panel-body .titull h3, h4{
   color:#f4a950;
 }
+.d-none{
+  display:none
+}
+
+#noBorder {
+   border-top: none;
+  vertical-align: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
 /*# sourceMappingURL=main.css.map */
