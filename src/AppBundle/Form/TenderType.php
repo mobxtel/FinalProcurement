@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Forms;
+namespace AppBundle\Form;
 
 use AppBundle\Entity\FushaOperimi;
 
