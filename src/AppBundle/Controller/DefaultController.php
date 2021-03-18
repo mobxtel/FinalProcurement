@@ -12,7 +12,7 @@ use AppBundle\Entity\Biznes;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/identifikohu", name="identifikohu")
      */
     public function indexAction(Request $request)
     {

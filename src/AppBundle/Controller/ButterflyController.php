@@ -13,12 +13,12 @@ use AppBundle\Entity\Biznes;
 class ButterflyController extends Controller
 {
     /**
-     * @Route("/home", name="landingpage")
+     * @Route("/", name="landingpage")
      */
 
     public function indexAction(Request $request)
 {
-    return $this->render('default/index0.html.twig');
+    return $this->render('default/landingpage.html.twig');
 }
 }
 

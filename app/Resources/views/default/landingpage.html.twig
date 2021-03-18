@@ -13,8 +13,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/butterflybootstrap/assets/img/favicon.png" rel="icon">
-    <link href="assets/butterflybootstrap/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -45,7 +45,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <a href="{{ path('landingpage') }}" class="logo mr-auto"><img src="{{ asset('assets/img/LogoHorizontal.png') }}" alt="" class="img-fluid" widht="250px"></a>
+        <a href="{{ path('landingpage') }}" class="logo mr-auto"><img src="{{ asset('assets/img/LogoHorizontal.png') }}" alt="" class="img-fluid img-responsive"  ></a>
         <!-- Uncomment below if you prefer to use text as a logo -->
         <!-- <h1 class="logo mr-auto"><a href="index.html">Butterfly</a></h1> -->
 
@@ -53,7 +53,7 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
 
-                <li><a href="{{ path('homepage') }}">Identifikohu</a></li>
+                <li><a href="{{ path('identifikohu') }}">Identifikohu</a></li>
                 <li><a href="{{ path('regjistohu') }}">Regjistrohu</a></li>
 {#                <li><a href="#portfolio">Portfolio</a></li>#}
 {#                <li><a href="#team">Team</a></li>#}
