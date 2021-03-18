@@ -3919,20 +3919,20 @@ fieldset[disabled] .btn-success:hover {
 .btn-info {
     color: #fff;
     background-color: #f4a950;
-    border-color: #46b8da
+    border-color: #f4a950
 }
 
 .btn-info.focus,
 .btn-info:focus {
     color: #fff;
-    background-color: #31b0d5;
-    border-color: #1b6d85
+    background-color: #EBB272;
+    border-color: #EBB272
 }
 
 .btn-info:hover {
     color: #fff;
-    background-color: #31b0d5;
-    border-color: #269abc
+    background-color: #EBB272;
+    border-color: #EBB272
 }
 
 .btn-info.active,
@@ -3973,7 +3973,7 @@ fieldset[disabled] .btn-info.focus,
 fieldset[disabled] .btn-info:focus,
 fieldset[disabled] .btn-info:hover {
     background-color: #f4a950;
-    border-color: #46b8da
+    border-color: #f4a950
 }
 
 .btn-info .badge {
@@ -8050,7 +8050,7 @@ button.close {
 
 .navbar-default .brand {
     float: left;
-    padding: 18px 39px !important;
+    padding: 10px 19px !important;
     background-color: #fff;
 }
 

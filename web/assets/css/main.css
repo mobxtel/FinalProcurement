@@ -1949,5 +1949,26 @@ table {
 .panel-body .col-lg-4{
   padding:0px;
 }
+@media screen and (max-width: 767px) {
+  .navbar-nav > li {
+    display: inline-block;
+    width: 24%;
+    position: inherit;
+    text-align: center;
+    float: right;
+  }
+  .icon-submenu {
+    display: none;
+
+  }
+}
+.navbar-nav > li > a img {
+  width: 43px;
+  margin-right: 2px;
+  height: 43px;
+}
+.navbar-nav > li > a {
+   padding-top: 19px;
+}
 /*{max-width: 100vw; height: 95vh;}*/
 /*# sourceMappingURL=main.css.map */

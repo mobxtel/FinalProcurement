@@ -16,6 +16,7 @@
         <tr>
             <th>TitullThirrje</th>
             <th>Vlera e Fondit Limit</th>
+{#            <th>Veprime</th>#}
             <th>Modifiko</th>
             <th>Publiko</th>
             <th>Shiko</th>
@@ -28,21 +29,25 @@
 
                 <td>{{ tender.titullThirrje }}</td>
                 <td>{{ tender.fondLimit }}</td>
-                <td><a href="{{ path('tender_edit', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_edit', {'id': tender.id}) }}">
 
                         <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
 
 
                 </td>
-                <td><a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
                         <button type="button" class="btn btn-success"><i class="lnr lnr-location"></i></button></a>
 
                 </td>
-                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
 
-                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i></button></a>
+                        <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i></button></a>
                 </td>
-                <td><a href="{{path('tender_fshi', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{path('tender_fshi', {'id': tender.id}) }}">
                         <button type="button" class="btn  btn-danger"><i class="lnr lnr-trash"></i></button></a>
                 </td>
             </tr>
@@ -64,7 +69,7 @@
             <th>TitullThirrje</th>
             <th>FondLimit</th>
             <th>DataPerfundimit</th>
-            <th>EmerStatusi</th>
+{#            <th>EmerStatusi</th>#}
             <th>Ofertat</th>
             <th>Modifiko</th>
             <th>Shiko</th>
@@ -83,30 +88,37 @@
                 <td>{{ tender.titullThirrje }}</td>
                 <td>{{ tender.fondLimit }}</td>
                 <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ tender.emerStatusi }}</td>
+{#                <td>{{ tender.emerStatusi }}</td>#}
                 <td><button type="button" class="btn btn-outline-dark">
                         <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
                              {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button></td>
-                <td><a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
 
                         <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
 
 
                 </td>
-                <td><a href="{{ path('tender_shiko', {'id': tender.id}) }}">
-                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button></a>
+                <td>
+                    <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                        <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> </button></a>
                 </td>
-                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
                         <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i> </button></a>
                 </td>
-                <td><a href="{{ path('tender_mbyll', {'id': tender.id}) }}">
+                <td>
+                    <a href="{{ path('tender_mbyll', {'id': tender.id}) }}">
+
                         <button type="button" class="btn btn-warning"><i class="lnr lnr-cross"></i></button></a>
                 </td>
-                <td></td>
+                <td>
+
+                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="15">no records found</td>
+                <td colspan="15">Asnjë e dhenë</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -143,7 +155,7 @@
                 </td>
                 <td>
                     <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
-                        <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button></a>
+                        <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> </button></a>
                 </td>
                 <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">
                         <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i></button>
